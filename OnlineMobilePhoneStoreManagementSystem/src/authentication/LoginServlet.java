@@ -9,7 +9,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class XMLServlet
+ * Servlet implementation class LoginServlet
  */
 public class LoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
@@ -28,10 +28,8 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		System.out.println("Hello from GET method in LoginServlet");
-		
 		String user = request.getParameter("	");
 		String pass = request.getParameter("passWord");
-
 		PrintWriter writer = response.getWriter();
 		writer.println("<h3> Hello from Get "+user+  "   " +pass+ "</h3>");
 	}
