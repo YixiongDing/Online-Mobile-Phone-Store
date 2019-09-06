@@ -4,9 +4,6 @@
   <artifactId>OnlineMobile</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <packaging>war</packaging>
-  <properties>
-    <java.version>1.8.0_171</java.version>
-  </properties>
   <build>
     <sourceDirectory>src</sourceDirectory>
     <resources>
@@ -18,13 +15,14 @@
       </resource>
     </resources>
     <plugins>
-      <plugin>
-        <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.7.0</version>
-        <configuration>
-          <release>10</release>
-        </configuration>
-      </plugin>
+     <plugin>
+	    <groupId>org.apache.maven.plugins</groupId>
+	    <artifactId>maven-compiler-plugin</artifactId>
+	    <version>3.8.0</version>
+	    <configuration>
+	        <release>7</release>
+	    </configuration>
+	</plugin>
       <plugin>
         <artifactId>maven-war-plugin</artifactId>
         <version>3.2.1</version>
