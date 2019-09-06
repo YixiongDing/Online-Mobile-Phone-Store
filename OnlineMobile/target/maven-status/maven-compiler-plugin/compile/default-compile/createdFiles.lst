@@ -1,0 +1,9 @@
+authentication/LoginServlet.class
+authentication/SimpleServlet.class
+scripts/ViewMobilePhones.class
+database/MobileGateway.class
+domain/MobilePhone.class
+authentication/XMLServlet.class
+database/Registry.class
+database/DBConnection.class
+database/MobileFinder.class
