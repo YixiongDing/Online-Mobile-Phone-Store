@@ -3,7 +3,6 @@ package scripts;
 import domain.MobilePhone;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +34,7 @@ public class ViewMobilePhones extends HttpServlet {
 		
 		System.out.println("Hello from GET method");
 		List<MobilePhone> mobiles = new ArrayList<MobilePhone>();
-		mobiles = MobilePhone.getAllAvailableMobiles();
+		mobiles = MobilePhone.getAllMobiles();
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		response.setContentType("text/html");		
 		request.setAttribute("mobiles", mobiles);

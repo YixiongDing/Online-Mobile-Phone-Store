@@ -5,9 +5,11 @@ import database.MobileGateway;
 import java.util.ArrayList;
 import java.util.List;
 
-public class MobilePhone {
+import DataMapper.MobileMapper;
 
-	private String id;
+public class MobilePhone extends DomainObject{
+
+	private int mobilePhjoneId;
 
     private String brand;
 
@@ -17,23 +19,28 @@ public class MobilePhone {
     
     private int qty;
 
-    public MobilePhone(String id, String brand, String model, float price, int qty) {
-        this.id = id;
+    public MobilePhone(int mobilePhjoneId, String brand, String model, float price, int qty) {
+        this.mobilePhjoneId = mobilePhjoneId;
         this.brand = brand;
         this.model = model;
         this.price = price;
         this.setQty (qty);
     }
+    
+	@Override
+	public String getId() {
+		return String.valueOf(this.mobilePhjoneId);
+	}
 
     public MobilePhone() {
 	}
 
-	public String getId() {
-        return id;
+	public int getMobileId() {
+        return mobilePhjoneId;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setId(int mobilePhjoneId) {
+        this.mobilePhjoneId = mobilePhjoneId;
     }
 
     public String getBrand() {
@@ -45,7 +52,7 @@ public class MobilePhone {
     }
 
     public String getModel() {
-        return model;
+        return model;		
     }
 
     public void setModel(String model) {
@@ -70,16 +77,34 @@ public class MobilePhone {
 	}
 
 
+//    public static List<MobilePhone> getAllAvailableMobiles() {
+//        MobileFinder finder = new MobileFinder();
+//        List<MobilePhone> result = new ArrayList<MobilePhone>();
+//        List<MobileGateway> mobilesRecords = finder.findAvailableMobiles();
+//
+//        for (MobileGateway mr : mobilesRecords) {
+//            MobilePhone mobilephone = new MobilePhone(mr.getId(), mr.getBrand(), mr.getModel(), mr.getPrice(), mr.getQty());
+//            result.add(mobilephone);
+//        }
+//
+//        return result;
+//
+//    }
+    
     public static List<MobilePhone> getAllAvailableMobiles() {
-        MobileFinder finder = new MobileFinder();
+        MobileMapper mapper = new MobileMapper();
+        System.out.println("this is mapper");
         List<MobilePhone> result = new ArrayList<MobilePhone>();
-        List<MobileGateway> mobilesRecords = finder.findAvailableMobiles();
+        result = mapper.findAvailableMobiles();
+        return result;
 
-        for (MobileGateway mr : mobilesRecords) {
-            MobilePhone mobilephone = new MobilePhone(String.valueOf(mr.getId()), mr.getBrand(), mr.getModel(), mr.getPrice(), mr.getQty());
-            result.add(mobilephone);
-        }
-
+    }
+    
+    public static List<MobilePhone> getAllMobiles() {
+        MobileMapper mapper = new MobileMapper();
+        System.out.println("this is all");
+        List<MobilePhone> result = new ArrayList<MobilePhone>();
+        result = mapper.findAllMobilePhone();
         return result;
 
     }
