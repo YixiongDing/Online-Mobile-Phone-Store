@@ -6,29 +6,45 @@ import java.util.List;
 
 import database.DBConnection;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
-public class MobileMapper {
+public class MobileMapper extends DataMapper{
 
-	private final static String findStatementString =
+	private final static String findMobilePhoneStatement =
 			"SELECT * " +
-					"  from mobilephones " +
-					"  WHERE id = ?";
+					"  FROM mobilephones " +
+					"  WHERE id = ? ";
 
-	private static final String findAvaliableMobilesStatement =
-			"SELECT * from mobilephones WHERE qty > 0";
+	private static final String findAvaliableMobilePhoneStatement =
+			"SELECT * " +
+					" FROM mobilephones " +
+					" WHERE qty > 0 ";
 
-	private static final String findAllMobilesStatement =
-			"SELECT * from mobilephones";
-
+	private static final String findAllMobilePhoneStatement =
+			"SELECT * " + 
+					" FROM mobilephones ";
+	
+	private static final String updateMobilePhoneStatement =
+			"UPDATE mobilephones "+
+					" SET model = ?, brand = ?, price = ?, qty = ? " +
+					" WHERE id  = ? ";
+	
+	private static final String insertMobilePhoneStatement = 
+			"INSERT INTO mobilephones " +
+					" (id, model, brand, price, qty) "+
+					" VALUES (?, ?, ?, ?, ?); ";
+	
+	private static final String deleteMobilePhoneStatement = 
+				"DELETE " +
+					" FROM mobilephones " +
+					" WHERE id  = ? ";
 
 	public static List<MobilePhone> findMobilePhone(MobilePhone mobile) {
 
 		List<MobilePhone> result = new ArrayList<MobilePhone>();
 		try {
-			PreparedStatement findStatement = DBConnection.prepare(findStatementString);
+			Connection dbConnection = DBConnection.getDBConnection();
+			PreparedStatement findStatement = DBConnection.prepare(findMobilePhoneStatement, dbConnection);
 			findStatement.setInt(1, mobile.getMobileId());
 			ResultSet rs = findStatement.executeQuery();
 
@@ -53,7 +69,8 @@ public class MobileMapper {
 	public List<MobilePhone> findAllMobilePhone(){
 		List<MobilePhone> result = new ArrayList<MobilePhone>();
 		try {
-			PreparedStatement findStatement = DBConnection.prepare(findAllMobilesStatement);
+			Connection dbConnection = DBConnection.getDBConnection();
+			PreparedStatement findStatement = DBConnection.prepare(findAllMobilePhoneStatement, dbConnection);
 			ResultSet rs = findStatement.executeQuery();
 
 			while(rs.next()) {
@@ -77,9 +94,8 @@ public class MobileMapper {
 	public List<MobilePhone> findAvailableMobiles() {
 		List<MobilePhone> result = new ArrayList<>();
 		try {
-
-			PreparedStatement stmt = DBConnection.prepare(findAvaliableMobilesStatement);
-
+			Connection dbConnection = DBConnection.getDBConnection();
+			PreparedStatement stmt = DBConnection.prepare(findAvaliableMobilePhoneStatement, dbConnection);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
 				System.out.println(rs.getInt(1));
@@ -97,17 +113,79 @@ public class MobileMapper {
 		return result;
 	}
 
+	@Override
+	public boolean update(DomainObject obj) {
+		MobilePhone mobile = (MobilePhone) obj;
 
-	//	public static void update(Person person) {
-	//		String sql =
-	//				"UPDATE people " +
-	//						" set lastname = {0}, firstname = {1}, number_of_dependents = {2}" +
-	//						" where id = {3}";
-	//		String sqlPrepared =
-	//				DB.prepare(sql, person.getLastName(), person.getFirstName(),
-	//						person.getNumberOfDependenents(), person.getID());
-	//		IDbCommand comm = new OleDbCommand(sqlPrepared, DB.Connection);
-	//		comm.executeNonQuery();
-	//	}
+		int result = 0;
+		try {
+			Connection dbConnection = DBConnection.getDBConnection();
+			PreparedStatement findStatement = DBConnection.prepare(updateMobilePhoneStatement, dbConnection);
+						
+			findStatement.setString(1, mobile.getModel());
+			findStatement.setString(2, mobile.getBrand());
+			findStatement.setFloat(3, mobile.getPrice());
+			findStatement.setInt(4, mobile.getQty());
+			findStatement.setInt(5, mobile.getMobileId());
+
+			result = findStatement.executeUpdate();
+			DBConnection.closePreparedStatement(findStatement);
+			DBConnection.closeConnection(dbConnection);
+			
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		if (result == 0)
+			return false;
+		else 
+			return true;
+	}
+	
+	@Override
+	public boolean insert(DomainObject obj) {
+		MobilePhone mobile = (MobilePhone) obj;
+		int result = 0;
+		try {
+			Connection dbConnection = DBConnection.getDBConnection();
+			PreparedStatement findStatement = DBConnection.prepare(insertMobilePhoneStatement, dbConnection);
+			
+			findStatement.setInt(1, mobile.getMobileId());
+			findStatement.setString(2, mobile.getModel());
+			findStatement.setString(3, mobile.getBrand());
+			findStatement.setFloat(4, mobile.getPrice());
+			findStatement.setInt(5, mobile.getQty());
+			
+			result = findStatement.executeUpdate();
+			DBConnection.closePreparedStatement(findStatement);
+			DBConnection.closeConnection(dbConnection);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (result == 0)
+			return false;
+		else 
+			return true;
+	}
+
+	@Override
+	public boolean delete(DomainObject obj) {
+		MobilePhone mobile = (MobilePhone) obj;
+		int result = 0;
+		try {
+			Connection dbConnection = DBConnection.getDBConnection();
+			PreparedStatement findStatement = DBConnection.prepare(deleteMobilePhoneStatement, dbConnection);
+	
+			findStatement.setInt(1, mobile.getMobileId());
+			result = findStatement.executeUpdate();
+			DBConnection.closePreparedStatement(findStatement);
+			DBConnection.closeConnection(dbConnection);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (result == 0)
+			return false;
+		else 
+			return true;
+	}
 
 }

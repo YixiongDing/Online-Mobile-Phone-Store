@@ -1,6 +1,4 @@
 package domain;
-import database.MobileFinder;
-import database.MobileGateway;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -76,20 +74,6 @@ public class MobilePhone extends DomainObject{
 		this.qty = qty;
 	}
 
-
-//    public static List<MobilePhone> getAllAvailableMobiles() {
-//        MobileFinder finder = new MobileFinder();
-//        List<MobilePhone> result = new ArrayList<MobilePhone>();
-//        List<MobileGateway> mobilesRecords = finder.findAvailableMobiles();
-//
-//        for (MobileGateway mr : mobilesRecords) {
-//            MobilePhone mobilephone = new MobilePhone(mr.getId(), mr.getBrand(), mr.getModel(), mr.getPrice(), mr.getQty());
-//            result.add(mobilephone);
-//        }
-//
-//        return result;
-//
-//    }
     
     public static List<MobilePhone> getAllAvailableMobiles() {
         MobileMapper mapper = new MobileMapper();
