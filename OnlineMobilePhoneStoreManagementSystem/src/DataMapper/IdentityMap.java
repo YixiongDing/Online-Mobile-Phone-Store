@@ -1,9 +1,9 @@
-package DataMapper;
+package dataMapper;
 
 import java.util.Map;
 import java.util.HashMap;
 
-class IdentityMap<E> {
+public class IdentityMap<E> {
 
 	private Map<Long, E> map = new HashMap<Long, E>();
 

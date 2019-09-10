@@ -1,9 +1,8 @@
-package DataMapper;
+package dataMapper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import DataMapper.*;
 import domain.*;
 
 public class UnitOfWork {
@@ -28,7 +27,7 @@ public class UnitOfWork {
 	}
 
 	public boolean checkAllList(DomainObject obj) {
-
+		
 		boolean isTrue = false;
 		if(dirtyObjects.contains(obj)) {
 			isTrue = true;
@@ -60,7 +59,7 @@ public class UnitOfWork {
 			return;
 		}
 		if(!checkAllList(obj)) {
-			newObjects.add(obj);
+			dirtyObjects.add(obj);
 		}
 	}
 
@@ -75,61 +74,48 @@ public class UnitOfWork {
 			deletedObjects.add(obj);
 		}
 	}
-	
-	public boolean commit(String sessionId) {
-		boolean addResult = true;
-		boolean updateResult = true;
-		boolean deleteResult = true;
+
+	public boolean commit() {
+		boolean result = true;
 		
-		//deal with new objects
+		for(DomainObject obj: dirtyObjects) {
+			if(!result) {
+				return false;
+			}
+
+			try {
+				DataMapper mapper = DataMapper.getMapper(obj);
+				result = mapper.update(obj);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+
 		for(DomainObject obj: newObjects) {
-			if(!addResult) {
+			if(!result) {
 				return false;
 			}
 			try {
-				DataMapper dm = (DataMapper) Class.forName(
-						"dataMapper."+obj.getClass().getSimpleName()+"Mapper").getDeclaredConstructor().newInstance();
-				addResult = dm.insert(obj);
+				DataMapper mapper = DataMapper.getMapper(obj);
+				result = mapper.insert(obj);
+
 			}catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
-		//deal with dirty objects
-		for(DomainObject obj: dirtyObjects) {
-			if(!updateResult) {
-				return false;
-			}
-			
-			try {
-				DataMapper dm = (DataMapper) Class.forName(
-						"dataMapper."+obj.getClass().getSimpleName()+"Mapper").getDeclaredConstructor().newInstance();
-				ImplicitMapper im = new ImplicitMapper(
-						dm, sessionId, obj.getClass().getSimpleName());
-				updateResult = im.update(obj);
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-		
-		//deal with deleted objects
+
 		for(DomainObject obj: deletedObjects) {
-			if(!deleteResult) {
+			if(!result) {
 				return false;
 			}
-			
 			try {
-				DataMapper dm = (DataMapper) Class.forName(
-						"dataMapper."+obj.getClass().getSimpleName()+"Mapper").getDeclaredConstructor().newInstance();
-				ImplicitMapper im = new ImplicitMapper(
-						dm, sessionId, obj.getClass().getSimpleName());
-				deleteResult = im.delete(obj);
+				DataMapper mapper = DataMapper.getMapper(obj);
+				result = mapper.delete(obj);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
 		}
-		
-		return addResult&&updateResult&&deleteResult;
+		return result;
 	}
 
 }

@@ -18,7 +18,7 @@
     <servlet-class>authentication.LoginServlet</servlet-class>
     <init-param>
       <param-name>userNameI</param-name>
-      <param-value>Admin</param-value>
+      <param-value>123</param-value>
     </init-param>
     <init-param>
       <param-name>passWordI</param-name>

@@ -1,6 +1,7 @@
-package scripts;
+package servlet;
 
 import domain.MobilePhone;
+import service.MobilePhoneService;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -33,11 +34,13 @@ public class ViewMobilePhones extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		System.out.println("Hello from GET method");
-		List<MobilePhone> mobiles = new ArrayList<MobilePhone>();
-		mobiles = MobilePhone.getAllMobiles();
+		List<MobilePhone> allMobilePhones = new ArrayList<MobilePhone>();
+		MobilePhoneService ms= new MobilePhoneService();		
+		
+		allMobilePhones = ms.getAllMobilePhone();
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		response.setContentType("text/html");		
-		request.setAttribute("mobiles", mobiles);
+		request.setAttribute("mobiles", allMobilePhones);
 		request.getRequestDispatcher("ViewMobilePhones.jsp").forward(request, response); 
 	}
 }

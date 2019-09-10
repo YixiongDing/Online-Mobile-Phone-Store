@@ -8,6 +8,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import domain.MobilePhone;
+import service.MobilePhoneService;
+
 /**
  * Servlet implementation class LoginServlet
  */
@@ -47,6 +50,8 @@ public class LoginServlet extends HttpServlet {
 		String correctUser = getServletConfig().getInitParameter("userNameI");
 		String correctPass = getServletConfig().getInitParameter("passWordI");
 		PrintWriter writer = response.getWriter();
+			
+		
 		//writer.println("<h3> Hello from Get "+user+  "   " +pass+ "</h3>");
 		
 

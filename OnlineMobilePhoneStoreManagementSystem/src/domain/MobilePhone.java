@@ -3,7 +3,7 @@ package domain;
 import java.util.ArrayList;
 import java.util.List;
 
-import DataMapper.MobileMapper;
+import dataMapper.MobilePhoneMapper;
 
 public class MobilePhone extends DomainObject{
 
@@ -73,24 +73,4 @@ public class MobilePhone extends DomainObject{
 	public void setQty(int qty) {
 		this.qty = qty;
 	}
-
-    
-    public static List<MobilePhone> getAllAvailableMobiles() {
-        MobileMapper mapper = new MobileMapper();
-        System.out.println("this is mapper");
-        List<MobilePhone> result = new ArrayList<MobilePhone>();
-        result = mapper.findAvailableMobiles();
-        return result;
-
-    }
-    
-    public static List<MobilePhone> getAllMobiles() {
-        MobileMapper mapper = new MobileMapper();
-        System.out.println("this is all");
-        List<MobilePhone> result = new ArrayList<MobilePhone>();
-        result = mapper.findAllMobilePhone();
-        return result;
-
-    }
-
 }

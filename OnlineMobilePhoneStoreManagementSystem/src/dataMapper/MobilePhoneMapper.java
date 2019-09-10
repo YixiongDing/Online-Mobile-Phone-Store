@@ -1,4 +1,4 @@
-package DataMapper;
+package dataMapper;
 import domain.MobilePhone;
 import domain.DomainObject;
 import java.util.ArrayList;
@@ -8,7 +8,7 @@ import database.DBConnection;
 
 import java.sql.*;
 
-public class MobileMapper extends DataMapper{
+public class MobilePhoneMapper extends DataMapper{
 
 	private final static String findMobilePhoneStatement =
 			"SELECT * " +
@@ -38,8 +38,9 @@ public class MobileMapper extends DataMapper{
 				"DELETE " +
 					" FROM mobilephones " +
 					" WHERE id  = ? ";
+	
 
-	public static List<MobilePhone> findMobilePhone(MobilePhone mobile) {
+	public List<MobilePhone> findMobilePhone(MobilePhone mobile) {
 
 		List<MobilePhone> result = new ArrayList<MobilePhone>();
 		try {
@@ -80,7 +81,7 @@ public class MobileMapper extends DataMapper{
 				m.setId(mobilePhoneId);
 				m.setModel(rs.getString(2));
 				m.setBrand(rs.getString(3));
-				m.setPrice(rs.getFloat(4));
+				m.setPrice(rs.getFloat(4));           
 				m.setQty(rs.getInt(5));
 				identityMap.put(m.getMobileId(),m);
 				result.add(m);
@@ -91,7 +92,7 @@ public class MobileMapper extends DataMapper{
 		return result;
 	}
 
-	public List<MobilePhone> findAvailableMobiles() {
+	public List<MobilePhone> findAvailableMobilePhone() {
 		List<MobilePhone> result = new ArrayList<>();
 		try {
 			Connection dbConnection = DBConnection.getDBConnection();
@@ -154,7 +155,7 @@ public class MobileMapper extends DataMapper{
 			findStatement.setString(3, mobile.getBrand());
 			findStatement.setFloat(4, mobile.getPrice());
 			findStatement.setInt(5, mobile.getQty());
-			
+
 			result = findStatement.executeUpdate();
 			DBConnection.closePreparedStatement(findStatement);
 			DBConnection.closeConnection(dbConnection);
