@@ -16,13 +16,16 @@ public class MobilePhone extends DomainObject{
     private float price;
     
     private int qty;
+    
+    private String description;
 
-    public MobilePhone(int mobilePhjoneId, String brand, String model, float price, int qty) {
+    public MobilePhone(int mobilePhjoneId, String brand, String model, float price, int qty, String description) {
         this.mobilePhjoneId = mobilePhjoneId;
         this.brand = brand;
         this.model = model;
         this.price = price;
-        this.setQty (qty);
+        this.qty = qty;
+        this.description = description;
     }
     
 	@Override
@@ -57,7 +60,6 @@ public class MobilePhone extends DomainObject{
         this.model = model;
     }
 
-
 	public float getPrice() {
 		return price;
 	}
@@ -73,4 +75,13 @@ public class MobilePhone extends DomainObject{
 	public void setQty(int qty) {
 		this.qty = qty;
 	}
+	
+
+    public String getDescription() {
+        return description;		
+    }
+    
+    public void setDescription(String description) {
+        this.description = description;		
+    }
 }

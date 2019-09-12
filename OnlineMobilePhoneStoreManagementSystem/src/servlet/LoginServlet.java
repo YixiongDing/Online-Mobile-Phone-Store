@@ -1,4 +1,4 @@
-package authentication;
+package servlet;
 
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -31,10 +31,7 @@ public class LoginServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		response.setContentType("text/html");
 		System.out.println("Hello from GET method in LoginServlet");
-		String user = request.getParameter("	");
-		String pass = request.getParameter("passWord");
-		PrintWriter writer = response.getWriter();
-		writer.println("<h3> Hello from Get "+user+  "   " +pass+ "</h3>");
+		response.sendRedirect("LoginPage.jsp");
 	}
 
 	/**
@@ -50,14 +47,10 @@ public class LoginServlet extends HttpServlet {
 		String correctUser = getServletConfig().getInitParameter("userNameI");
 		String correctPass = getServletConfig().getInitParameter("passWordI");
 		PrintWriter writer = response.getWriter();
-			
-		
-		//writer.println("<h3> Hello from Get "+user+  "   " +pass+ "</h3>");
-		
+					
 
 		if(user.equals(correctUser) && pass.equals(correctPass)) {
-			//writer.println("<h3> Hello from Post: Your user name is: "+user+  " , Your password is:    " +pass+ "</h3>");
-			response.sendRedirect("Success.jsp");
+			response.sendRedirect("LoginSuccess.jsp");
 		}else {
 			writer.println("<h3> Error </h3>");
 		}

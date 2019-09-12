@@ -23,6 +23,8 @@ public class MobilePhoneService {
 	public boolean updateMobilePhone(MobilePhone mobile) {
 		UnitOfWork.newCurrent();
 		UnitOfWork.getCurrent().registerDirty(mobile);
+	    System.out.println("2"+mobile.getId()+mobile.getDescription());
+
 		return UnitOfWork.getCurrent().commit();
 	}
 	

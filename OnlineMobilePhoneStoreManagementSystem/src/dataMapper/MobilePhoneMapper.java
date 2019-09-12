@@ -26,13 +26,13 @@ public class MobilePhoneMapper extends DataMapper{
 	
 	private static final String updateMobilePhoneStatement =
 			"UPDATE mobilephones "+
-					" SET model = ?, brand = ?, price = ?, qty = ? " +
+					" SET model = ?, brand = ?, price = ?, qty = ?, description = ? " +
 					" WHERE id  = ? ";
 	
 	private static final String insertMobilePhoneStatement = 
 			"INSERT INTO mobilephones " +
-					" (id, model, brand, price, qty) "+
-					" VALUES (?, ?, ?, ?, ?); ";
+					" (id, model, brand, price, qty, description) "+
+					" VALUES (?, ?, ?, ?, ?, ?); ";
 	
 	private static final String deleteMobilePhoneStatement = 
 				"DELETE " +
@@ -58,6 +58,7 @@ public class MobilePhoneMapper extends DataMapper{
 				m.setBrand(rs.getString(3));
 				m.setPrice(rs.getFloat(4));
 				m.setQty(rs.getInt(5));
+				m.setDescription(rs.getString(6));
 				identityMap.put(m.getMobileId(),m);
 				result.add(m);
 			}
@@ -83,6 +84,7 @@ public class MobilePhoneMapper extends DataMapper{
 				m.setBrand(rs.getString(3));
 				m.setPrice(rs.getFloat(4));           
 				m.setQty(rs.getInt(5));
+				m.setDescription(rs.getString(6));
 				identityMap.put(m.getMobileId(),m);
 				result.add(m);
 			}
@@ -99,13 +101,13 @@ public class MobilePhoneMapper extends DataMapper{
 			PreparedStatement stmt = DBConnection.prepare(findAvaliableMobilePhoneStatement, dbConnection);
 			ResultSet rs = stmt.executeQuery();
 			while (rs.next()) {
-				System.out.println(rs.getInt(1));
-				int id =  rs.getInt(1);
+				int idArg = rs.getInt(1);
 				String modelArg = rs.getString(2);
 				String brandArg = rs.getString(3);
 				int priceArg = rs.getInt(4);
 				int qtyArg = rs.getInt(5);
-				result.add( new MobilePhone(id, modelArg, brandArg, priceArg,qtyArg));
+				String descriptionArg = rs.getString(6);
+				result.add( new MobilePhone(idArg, modelArg, brandArg, priceArg, qtyArg, descriptionArg));
 			}
 
 		} catch (SQLException e) {
@@ -127,7 +129,8 @@ public class MobilePhoneMapper extends DataMapper{
 			findStatement.setString(2, mobile.getBrand());
 			findStatement.setFloat(3, mobile.getPrice());
 			findStatement.setInt(4, mobile.getQty());
-			findStatement.setInt(5, mobile.getMobileId());
+			findStatement.setString(5, mobile.getDescription());
+			findStatement.setInt(6, mobile.getMobileId());
 
 			result = findStatement.executeUpdate();
 			DBConnection.closePreparedStatement(findStatement);
@@ -155,7 +158,8 @@ public class MobilePhoneMapper extends DataMapper{
 			findStatement.setString(3, mobile.getBrand());
 			findStatement.setFloat(4, mobile.getPrice());
 			findStatement.setInt(5, mobile.getQty());
-
+			findStatement.setString(6, mobile.getDescription());
+			
 			result = findStatement.executeUpdate();
 			DBConnection.closePreparedStatement(findStatement);
 			DBConnection.closeConnection(dbConnection);

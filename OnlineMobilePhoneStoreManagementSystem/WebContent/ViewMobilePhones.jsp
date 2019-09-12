@@ -9,28 +9,30 @@
 <style>
 /* Float four columns side by side */
 .column {
-  float: left;
-  width: 25%;
-  padding: 0 10px;
+	float: left;
+	width: 25%;
+	padding: 0 10px;
 }
 
 /* Remove extra left and right margins, due to padding */
-.row {margin: 0 -5px;}
+.row {
+	margin: 0 -5px;
+}
 
 /* Clear floats after the columns */
 .row:after {
-  content: "";
-  display: table;
-  clear: both;
+	content: "";
+	display: table;
+	clear: both;
 }
 
 /* Responsive columns */
 @media screen and (max-width: 600px) {
-  .column {
-    width: 100%;
-    display: block;
-    margin-bottom: 20px;
-  }
+	.column {
+		width: 100%;
+		display: block;
+		margin-bottom: 20px;
+	}
 }
 
 /* Style the counter cards */
@@ -56,25 +58,21 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
+			<li class="nav-item"><a class="nav-link" href="HomePageServlet">Home</a></li>
 			<li class="nav-item active"><a class="nav-link"
-				href="index.jsp">Home <span class="sr-only">(current)</span></a></li>
-			<li class="nav-item"><a class="nav-link" href="ViewMobilePhones">All
-					Mobile Phones</a></li>
-			<li class="nav-item"><a class="nav-link"
-				href="SimpleLogInForm.html">Login</a></li>
-
+				href="ViewMobilePhones">All
+					Mobile Phones<span class="sr-only">(current)</span>
+			</a></li>
 		</ul>
-		<form class="form-inline my-2 my-lg-0">
-			<input class="form-control mr-sm-2" type="search"
-				placeholder="Search" aria-label="Search">
-			<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-		</form>
+		<div class="nav-item  my-2 my-lg-0">
+			<a class="nav-link" href="LoginServlet">Hello! Please Login</a>
+		</div>
 	</div>
 </nav>
 <body>
 	<section class="text-center my-5">
 
-		<div class='container'>
+		<%-- 		<div class='container'>
 			<table class='table table-bordered table-striped'>
 				<tr>
 					<th>id</th>
@@ -98,7 +96,7 @@
 					%>
 				</tbody>
 			</table>
-		</div>
+		</div> --%>
 		<div class="row">
 			<%
 						List<MobilePhone> mobiless = (ArrayList<MobilePhone>) request.getAttribute("mobiles");
@@ -106,10 +104,10 @@
 						for (MobilePhone mobile : mobiless) {
 							out.println("<div class=\"column\">");
 							out.println("<div class=\"card\"\">");
-							out.println("<img src=\"Resources/apple-iphone-xs-max-gold.jpg\" class=\"card-img-top\" alt=\"...\">");
+							out.println("<img src=\"Resources/mp-" + mobile.getMobileId()+".jpg\" class=\"card-img-top\" alt=\"...\">");
 							out.println("<div class=\"card-body\">");
 							out.println("<h5 class=\"card-title\">"+mobile.getModel()+"</h5>");
-							out.println("<p class=\"card-text\">Some quick example text to build on the card title and make up the bulk of the cards content.</p>");
+							out.println("<p class=\"card-text\">"+mobile.getDescription()+"</p>");
 							out.println("<a href=\"#\" class=\"btn btn-primary\">View Detail</a>");
 							out.println("</div></div></div>");
 						}
