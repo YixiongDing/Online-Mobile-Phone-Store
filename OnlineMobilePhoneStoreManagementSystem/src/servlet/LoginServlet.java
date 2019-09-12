@@ -29,8 +29,8 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		response.setContentType("text/html");
 		System.out.println("Hello from GET method in LoginServlet");
+		response.setContentType("text/html");
 		response.sendRedirect("LoginPage.jsp");
 	}
 
@@ -38,22 +38,16 @@ public class LoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		response.setContentType("text/html");
 		System.out.println("Hello from Post method in LoginServlet");
+		response.setContentType("text/html");
 		String user = request.getParameter("userName");
 		String pass = request.getParameter("passWord");
-		
 		String correctUser = getServletConfig().getInitParameter("userNameI");
-		String correctPass = getServletConfig().getInitParameter("passWordI");
-		PrintWriter writer = response.getWriter();
-					
-
+		String correctPass = getServletConfig().getInitParameter("passWordI");					
 		if(user.equals(correctUser) && pass.equals(correctPass)) {
 			response.sendRedirect("LoginSuccess.jsp");
 		}else {
-			writer.println("<h3> Error </h3>");
+			response.sendRedirect("LoginFail.jsp");
 		}
-		
 	}
 }

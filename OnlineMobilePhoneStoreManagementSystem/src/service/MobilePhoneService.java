@@ -23,8 +23,6 @@ public class MobilePhoneService {
 	public boolean updateMobilePhone(MobilePhone mobile) {
 		UnitOfWork.newCurrent();
 		UnitOfWork.getCurrent().registerDirty(mobile);
-	    System.out.println("2"+mobile.getId()+mobile.getDescription());
-
 		return UnitOfWork.getCurrent().commit();
 	}
 	
@@ -36,7 +34,7 @@ public class MobilePhoneService {
 	
 	public List<MobilePhone> getMobilePhone(MobilePhone mobile){
 		dataMapper.IdentityMap<MobilePhone> identityMap = dataMapper.IdentityMap.getInstance(mobile);
-		MobilePhone mobile_Map = identityMap.get(mobile.getMobileId());
+		MobilePhone mobile_Map = identityMap.get(mobile.getMobilePhoneId());
 		if (mobile_Map != null) {
 			List<MobilePhone> result = new ArrayList<MobilePhone>();
 			result.add(mobile_Map);
@@ -52,7 +50,6 @@ public class MobilePhoneService {
 	public List<MobilePhone> getAvailableMobilePhone() {
 		return mapper.findAvailableMobilePhone();
 	}
-	
 	
 }
 

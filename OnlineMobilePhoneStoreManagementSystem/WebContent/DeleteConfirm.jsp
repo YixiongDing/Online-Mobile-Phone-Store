@@ -15,7 +15,7 @@
 <link rel='stylesheet' href='style.css' />
 </head>
 <h1 class="h1-responsive font-weight-bold text-center my-5">Online
-	Mobile Phone Store</h1>
+	Mobile Phone Store Management System</h1>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"
@@ -31,34 +31,33 @@
 		MobilePhone mobile = mobiles.get(0);
 	%>
 	<section class="container text-center">
-		<h2>Are you sure to delete</h2>
-		<img style="width: 30%; height: 30%;"
-			<%out.println("src=\"Resources/mp-" + mobile.getMobileId() + ".jpg\"");%>
+		<div style="margin-bottom: 30px;">
+			<h2>Are you sure to delete</h2>
+		</div>
+		<img style="width: 20%; height: 20%; margin-bottom: 30px;"
+			<%out.println("src=\"Resources/mp-" + mobile.getMobilePhoneId() + ".jpg\"");%>
 			class="card-img-top" alt="...">
-		<div class="card">
-
-			<div class="card-body">
-				<%
-					out.println("<h5 class=\"card-title\">" + mobile.getMobileId()+ "</h5>");
-					out.println("<p class=\"card-text\">" + mobile.getModel()+ "</p>");
-
-				%>
-			</div>
+		<div class="card"
+			style=" margin-bottom: 30px; margin-left: auto; margin-right: auto; width: 20%;">
 			<ul class="list-group list-group-flush">
 				<%
-					out.println("<li class=\"list-group-item\">" + mobile.getBrand()+ "</li>");
-					out.println("<li class=\"list-group-item\"> Price: $" + mobile.getPrice()+ "</li>");
-					out.println("<li class=\"list-group-item\"> Quantity: " + mobile.getQty()+ "</li>");
-
+					out.println("<div>" + mobile.getMobilePhoneId() + "</div>");
+					out.println("<div>" + mobile.getModelName() + "</div>");
+					out.println("<div>" + mobile.getBrand() + "</div>");
+					out.println("<div>" + mobile.getColor() + "</div>");
+					out.println("<div>" + mobile.getStorageSize() + "</div>");
+					out.println("<div>$" + mobile.getPrice() + "</div>");
+					out.println("<div>" + mobile.getQty() + "</div>");
 				%>
 			</ul>
-			<form action="DeleteMobilePhoneServlet" method="post">
-				<button type="submit" name="delete" <% out.println("value="+ mobile.getMobileId()); %>
-					class="btn btn-primary" >Delete</button>
-				<button type="submit" name="cancel" value="cancel"
-					class="btn btn-primary">Cancel</button>
-			</form>
-		</div>	
+		</div>
+		<form action="DeleteMobilePhoneServlet" method="post">
+			<button type="submit" name="delete"
+				<%out.println("value=" + mobile.getMobilePhoneId());%>
+				class="btn btn-primary">Delete</button>
+			<button type="submit" name="cancel" value="cancel"
+				class="btn btn-primary">Cancel</button>
+		</form>
 	</section>
 </body>
 </html>

@@ -56,10 +56,9 @@
 				<div class="view overlay rounded z-depth-2 mb-4">
 					<img class="img-fluid"
 						<% 						
-							out.println("src=\"Resources/mp-" + m1.getMobileId()+".jpg\"");
+							out.println("src=\"Resources/mp-" + m1.getMobilePhoneId()+".jpg\"");
 						%>
-						alt="Sample image">
-					<a>
+						alt="Sample image"> <a>
 						<div class="mask rgba-white-slight"></div>
 					</a>
 				</div>
@@ -72,7 +71,7 @@
 				<!-- Post title -->
 				<h4 class="font-weight-bold mb-3">
 					<%
-						out.println("<strong>" + m1.getModel() + "</strong>");
+						out.println("<strong>" + m1.getModelName() + "</strong>");
 					%>
 				</h4>
 				<!-- Post data -->
@@ -93,10 +92,10 @@
 			<div class="col-lg-4 col-md-6 mb-md-0 mb-4">
 				<!-- Featured image -->
 				<div class="view overlay rounded z-depth-2 mb-4">
-					<img class="img-fluid" 
+					<img class="img-fluid"
 						<% 						
-							out.println("src=\"Resources/mp-" + m2.getMobileId()+".jpg\"");
-						%>						
+							out.println("src=\"Resources/mp-" + m2.getMobilePhoneId()+".jpg\"");
+						%>
 						alt="Sample image"> <a>
 						<div class="mask rgba-white-slight"></div>
 					</a>
@@ -110,7 +109,7 @@
 				<!-- Post title -->
 				<h4 class="font-weight-bold mb-3">
 					<%
-						out.println("<strong>" + m2.getModel() + "</strong>");
+						out.println("<strong>" + m2.getModelName() + "</strong>");
 					%>
 				</h4>
 				<!-- Post data -->
@@ -131,10 +130,10 @@
 			<div class="col-lg-4 col-md-6 mb-0">
 				<!-- Featured image -->
 				<div class="view overlay rounded z-depth-2 mb-4">
-					<img class="img-fluid" 
+					<img class="img-fluid"
 						<% 						
-							out.println("src=\"Resources/mp-" + m3.getMobileId()+".jpg\"");
-						%>						
+							out.println("src=\"Resources/mp-" + m3.getMobilePhoneId()+".jpg\"");
+						%>
 						alt="Sample image"> <a>
 						<div class="mask rgba-white-slight"></div>
 					</a>
@@ -148,7 +147,7 @@
 				<!-- Post title -->
 				<h4 class="font-weight-bold mb-3">
 					<%
-						out.println("<strong>" + m3.getModel() + "</strong>");
+						out.println("<strong>" + m3.getModelName() + "</strong>");
 					%>
 				</h4>
 				<!-- Post data -->

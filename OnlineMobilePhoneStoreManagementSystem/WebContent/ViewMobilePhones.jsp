@@ -12,6 +12,7 @@
 	float: left;
 	width: 25%;
 	padding: 0 10px;
+	margin-top: 20px;
 }
 
 /* Remove extra left and right margins, due to padding */
@@ -60,8 +61,7 @@
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item"><a class="nav-link" href="HomePageServlet">Home</a></li>
 			<li class="nav-item active"><a class="nav-link"
-				href="ViewMobilePhones">All
-					Mobile Phones<span class="sr-only">(current)</span>
+				href="ViewMobilePhones">All Mobile Phones<span class="sr-only">(current)</span>
 			</a></li>
 		</ul>
 		<div class="nav-item  my-2 my-lg-0">
@@ -71,32 +71,6 @@
 </nav>
 <body>
 	<section class="text-center my-5">
-
-		<%-- 		<div class='container'>
-			<table class='table table-bordered table-striped'>
-				<tr>
-					<th>id</th>
-					<th>Model</th>
-					<th>Brand</th>
-					<th>Price</th>
-					<th>Add to Cart</th>
-				</tr>
-				<tbody>
-					<%
-						List<MobilePhone> mobiles = (ArrayList<MobilePhone>) request.getAttribute("mobiles");
-
-						for (MobilePhone mobile : mobiles) {
-							out.println("<form action=\"cart\" method=\"post\">");
-							out.print("<tr><td>" + mobile.getMobileId() + "</td><td>" + mobile.getModel() + "</td><td>"
-									+ mobile.getBrand() + "</td><td>" + mobile.getPrice() + "</td>"
-									+ "<td colspan=\"2\" align=\"center\"><button type=\"submit\" name=\"isbn\" value=\""
-									+ mobile.getId() + "\" class=\"btn btn-default\">Add to Cart</button></td></tr>");
-							out.println("</form>");
-						}
-					%>
-				</tbody>
-			</table>
-		</div> --%>
 		<div class="row">
 			<%
 						List<MobilePhone> mobiless = (ArrayList<MobilePhone>) request.getAttribute("mobiles");
@@ -104,9 +78,9 @@
 						for (MobilePhone mobile : mobiless) {
 							out.println("<div class=\"column\">");
 							out.println("<div class=\"card\"\">");
-							out.println("<img src=\"Resources/mp-" + mobile.getMobileId()+".jpg\" class=\"card-img-top\" alt=\"...\">");
+							out.println("<img src=\"Resources/mp-" + mobile.getMobilePhoneId()+".jpg\" class=\"card-img-top\" alt=\"...\">");
 							out.println("<div class=\"card-body\">");
-							out.println("<h5 class=\"card-title\">"+mobile.getModel()+"</h5>");
+							out.println("<h5 class=\"card-title\">"+mobile.getModelName()+"</h5>");
 							out.println("<p class=\"card-text\">"+mobile.getDescription()+"</p>");
 							out.println("<a href=\"#\" class=\"btn btn-primary\">View Detail</a>");
 							out.println("</div></div></div>");

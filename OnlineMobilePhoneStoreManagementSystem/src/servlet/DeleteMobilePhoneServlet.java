@@ -32,7 +32,7 @@ public class DeleteMobilePhoneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
+		System.out.println("Hello from GET method in DeleteMobilePhoneServlet");
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
@@ -40,14 +40,12 @@ public class DeleteMobilePhoneServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-
+		System.out.println("Hello from POST method in DeleteMobilePhoneServlet");
 		if(request.getParameter("delete") != null){
 			MobilePhoneService ms= new MobilePhoneService();		
 			MobilePhone m = new MobilePhone();
-			List<MobilePhone> result = new ArrayList<MobilePhone>();
 			String deleteId = request.getParameter("delete");
-			m.setId(Integer.valueOf(deleteId));
+			m.setMobilePhoneId(Integer.valueOf(deleteId));
 			if(ms.deleteMobilePhone(m)) {
 				response.sendRedirect("ManageMobilePhoneServlet");
 			}

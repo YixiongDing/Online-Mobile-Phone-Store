@@ -14,9 +14,9 @@
 <link rel='stylesheet' href='style.css' />
 </head>
 <h1 class="h1-responsive font-weight-bold text-center my-5">Online
-	Mobile Phone Store</h1>
+	Mobile Phone Store Management System</h1>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-	<a class="navbar-brand" href="#">Welcome</a>
+	<a class="navbar-brand" href="">Welcome, Administrator</a>
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"
 		aria-controls="navbarSupportedContent" aria-expanded="false"
@@ -49,6 +49,8 @@
 				<tr>
 					<th>id</th>
 					<th>Model</th>
+					<th>Storage Size</th>
+					<th>Color</th>
 					<th>Brand</th>
 					<th>Price</th>
 					<th>Quantity</th>
@@ -60,19 +62,32 @@
 
 						for (MobilePhone mobile : mobiles) {
 							out.println("<form action=\"ManageMobilePhoneServlet\" method=\"post\">");
-							out.print("<tr><td>" + mobile.getMobileId() + "</td><td>" + mobile.getModel() + "</td><td>"
-									+ mobile.getBrand() + "</td><td>" + mobile.getPrice() + "</td><td>" + mobile.getQty() + "</td>"
+							out.print("<tr><td>" 
+									+ mobile.getMobilePhoneId() 
+									+ "</td><td>" 
+									+ mobile.getModelName() 
+									+"</td><td>"
+									+ mobile.getStorageSize()
+									+"</td><td>"
+									+ mobile.getColor()
+									+ "</td><td>"
+									+ mobile.getBrand() 
+									+ "</td><td>" 
+									+ mobile.getPrice() 
+									+ "</td><td>" 
+									+ mobile.getQty() 
+									+ "</td>"
 									+ "<td colspan=\"2\" align=\"center\">"
 									+ "<button style=\"margin: 0px 10px 0px 10px;\" type=\"submit\" name=\"update\" value=\""
-									+ mobile.getMobileId() + "\" class=\"btn btn-primary\">Update</button>"
+									+ mobile.getMobilePhoneId() + "\" class=\"btn btn-primary\">Update</button>"
 									+ "<button style=\"margin: 0px 10px 0px 10px;\" type=\"submit\" name=\"delete\" value=\""
-									+ mobile.getMobileId() + "\" class=\"btn btn-primary\">Delete</button></td></tr>");
+									+ mobile.getMobilePhoneId() + "\" class=\"btn btn-primary\">Delete</button></td></tr>");
 							out.println("</form>");
 						}
 					%>
 				</tbody>
 			</table>
-			<form action = "AddMobilePhoneServlet" method = "get">
+			<form action="AddMobilePhoneServlet" method="get">
 				<button type="submit" name="insert" value="insert"
 					class="btn btn-primary">Add A New Mobile Phone</button>
 			</form>

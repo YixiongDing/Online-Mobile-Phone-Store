@@ -15,7 +15,7 @@
 <link rel='stylesheet' href='style.css' />
 </head>
 <h1 class="h1-responsive font-weight-bold text-center my-5">Online
-	Mobile Phone Store</h1>
+	Mobile Phone Store Management System</h1>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"
@@ -30,47 +30,70 @@
 		List<MobilePhone> mobiles = (ArrayList<MobilePhone>) request.getAttribute("mobile");
 		MobilePhone mobile = mobiles.get(0);
 	%>
+	<a href="ManageMobilePhoneServlet" class="blue-text">
+		<h6 class="font-weight-bold mb-3" style="font-size: 20px;">
+			<i class="fas fa-fire pr-2"><- Manage Mobile Phones </i>
+		</h6>
+	</a>
 	<section class="container text-center">
-		<form action="UpdateMobilePhoneInfoServlet" method="post">
+		<h2 style="margin-bottom: 20px;">Update Mobile Phone Information</h2>
+
+		<form action="UpdateMobilePhoneInfoServlet" method="post"
+			style="margin-left: auto; margin-right: auto; width: 20%;">
 			<div class="form-group">
-				<label for="exampleFormControlInput1" style=" font-size: 25px">Id</label> <input readonly
-					name="id" class="form-control" id="exampleFormControlInput1"
-					style="text-align: center;"
-					<%out.println("value="+mobile.getMobileId()); %>>
+				<label for="exampleFormControlInput1" style="font-size: 15px">Id</label>
+				<input readonly name="id" class="form-control"
+					id="exampleFormControlInput1" style="text-align: center;"
+					<%out.println("value=\"" + mobile.getMobilePhoneId() + "\"");%>></input>
 			</div>
 			<div class="form-group">
-				<label for="exampleFormControlinput1" style=" font-size: 25px">Model</label> <input
-					style="text-align: center;" class="form-control"
-					id="exampleFormControlinput1" name="model"
-					<%out.println("value="+mobile.getModel()); %> rows="1"></input>
+				<label for="exampleFormControlinput1" style="font-size: 15px">Model
+					Name</label> <input style="text-align: center;" class="form-control"
+					id="exampleFormControlinput1" name="modelName" required
+					<%out.println("value=\"" + mobile.getModelName() + "\"");%>></input>
 			</div>
 			<div class="form-group">
-				<label for="exampleFormControlinput1"style=" font-size: 25px" >Brand</label> <input
-					style="text-align: center;" class="form-control"
-					id="exampleFormControlinput1" name="brand"
-					<%out.println("value="+mobile.getBrand()); %> rows="1"></input>
+				<label for="exampleFormControlinput1" style="font-size: 15px">Storage
+					Size</label> <input style="text-align: center;" class="form-control"
+					id="exampleFormControlinput1" name="storageSize" required
+					<%out.println("value=\"" + mobile.getStorageSize() + "\"");%>></input>
 			</div>
 			<div class="form-group">
-				<label for="exampleFormControlinput1"style=" font-size: 25px" >Price</label> <input
-					style="text-align: center;" class="form-control"
-					id="exampleFormControlinput1" name="price"
-					<%out.println("value="+mobile.getPrice()); %> rows="1"></input>
+				<label for="exampleFormControlinput1" style="font-size: 15px">Color</label>
+				<input style="text-align: center;" class="form-control"
+					id="exampleFormControlinput1" name="color" required
+					<%out.println("value=\"" + mobile.getColor() + "\"");%>></input>
 			</div>
 			<div class="form-group">
-				<label for="exampleFormControlinput1"style=" font-size: 25px" >Quantity</label> <input
-					style="text-align: center;" class="form-control"
-					id="exampleFormControlinput1" name="qty"
-					<%out.println("value="+mobile.getQty()); %> rows="1"></input>
+				<label for="exampleFormControlinput1" style="font-size: 15px">Brand</label>
+				<input style="text-align: center;" class="form-control"
+					id="exampleFormControlinput1" name="brand" required
+					<%out.println("value=\"" + mobile.getBrand() + "\"");%>></input>
 			</div>
 			<div class="form-group">
-				<label for="exampleFormControlinput1" style=" font-size: 25px" >Description</label> <input
-					style="text-align: center;" class="form-control"
-					id="exampleFormControlinput1" name="description"
-					<%out.println("value="+mobile.getDescription()); %> rows="3"></input>
+				<label for="exampleFormControlinput1" style="font-size: 15px">Price</label>
+				<input style="text-align: center;" class="form-control"
+					type="number" id="exampleFormControlinput1" name="price" required
+					<%out.println("value=\"" + mobile.getPrice() + "\"");%>></input>
+			</div>
+			<div class="form-group">
+				<label for="exampleFormControlinput1" style="font-size: 15px">Quantity</label>
+				<input style="text-align: center;" class="form-control"
+					type="number" id="exampleFormControlinput1" name="qty" required
+					<%out.println("value=\"" + mobile.getQty() + "\"");%>></input>
+			</div>
+			<div class="form-group">
+				<label for="exampleFormControlinput1" style="font-size: 15px">Description</label>
+				<textarea style="text-align: center;" class="form-control"
+					id="exampleFormControlinput1" name="description" rows="5">
+					<%
+						out.println(mobile.getDescription());
+					%>
+				</textarea>
 			</div>
 			<footer>
-				<button type="submit" name="button" value="submit" class="btn btn-primary">Submit</button>
-				<button type="submit" name="button" value="cancel" class="btn btn-primary">Cancel</button>
+				<button type="submit" name="button" value="submit"
+					class="btn btn-primary">Submit</button>
 			</footer>
 		</form>
 	</section>

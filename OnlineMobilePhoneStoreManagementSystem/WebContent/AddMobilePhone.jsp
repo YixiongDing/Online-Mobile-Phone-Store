@@ -15,7 +15,7 @@
 <link rel='stylesheet' href='style.css' />
 </head>
 <h1 class="h1-responsive font-weight-bold text-center my-5">Online
-	Mobile Phone Store</h1>
+	Mobile Phone Store Management System</h1>
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
 	<button class="navbar-toggler" type="button" data-toggle="collapse"
 		data-target="#navbarSupportedContent"
@@ -26,43 +26,58 @@
 
 </nav>
 <body>
+	<a href="ManageMobilePhoneServlet" class="blue-text">
+		<h6 class="font-weight-bold mb-3" style="font-size: 20px;">
+			<i class="fas fa-fire pr-2"><- Manage Mobile Phones </i>
+		</h6>
+	</a>
 	<section class="container text-center">
-		<form action="AddMobilePhoneServlet" method="post">
+		<h2 style="margin-bottom: 20px;">Add New Mobile Phone</h2>
+		<form action="AddMobilePhoneServlet" method="post"
+			style="margin-left: auto; margin-right: auto; width: 20%;">
 			<div class="form-group">
-				<label for="exampleFormControlInput1" style="font-size: 25px">Id</label>
-				<input name="id" class="form-control" id="exampleFormControlInput1"
-					style="text-align: center;">
+				<label for="exampleFormControlInput1" style="font-size: 15px">Id</label>
+				<input style="text-align: center;" class="form-control" required
+					type="number" id="exampleFormControlInput1" name="id"></input>
 			</div>
 			<div class="form-group">
-				<label for="exampleFormControlinput1" style="font-size: 25px">Model</label>
-				<input style="text-align: center;" class="form-control"
-					id="exampleFormControlinput1" name="model"></input>
+				<label for="exampleFormControlinput1" style="font-size: 15px">Model
+					Name</label> <input style="text-align: center;" class="form-control"
+					required id="exampleFormControlinput1" name="modelName"></input>
 			</div>
 			<div class="form-group">
-				<label for="exampleFormControlinput1" style="font-size: 25px">Brand</label>
-				<input style="text-align: center;" class="form-control"
+				<label for="exampleFormControlinput1" style="font-size: 15px">Storage
+					Size</label> <input style="text-align: center;" class="form-control"
+					required id="exampleFormControlinput1" name="storageSize"></input>
+			</div>
+			<div class="form-group">
+				<label for="exampleFormControlinput1" style="font-size: 15px">Color</label>
+				<input style="text-align: center;" class="form-control" required
+					id="exampleFormControlinput1" name="color"></input>
+			</div>
+			<div class="form-group">
+				<label for="exampleFormControlinput1" style="font-size: 15px">Brand</label>
+				<input style="text-align: center;" class="form-control" required
 					id="exampleFormControlinput1" name="brand"></input>
 			</div>
 			<div class="form-group">
-				<label for="exampleFormControlinput1" style="font-size: 25px">Price</label>
-				<input style="text-align: center;" class="form-control"
-					id="exampleFormControlinput1" name="price"></input>
+				<label for="exampleFormControlinput1" style="font-size: 15px">Price</label>
+				<input style="text-align: center;" class="form-control" required
+					type="number" id="exampleFormControlinput1" name="price"></input>
 			</div>
 			<div class="form-group">
-				<label for="exampleFormControlinput1" style="font-size: 25px">Quantity</label>
-				<input style="text-align: center;" class="form-control"
-					id="exampleFormControlinput1" name="qty"></input>
+				<label for="exampleFormControlinput1" style="font-size: 15px">Quantity</label>
+				<input style="text-align: center;" class="form-control" required
+					type="number" id="exampleFormControlinput1" name="qty"></input>
 			</div>
 			<div class="form-group">
-				<label for="exampleFormControlinput1" style="font-size: 25px">Description</label>
-				<input style="text-align: center;" class="form-control"
+				<label for="exampleFormControlinput1" style="font-size: 15px">Description</label>
+				<input style="text-align: center;" class="form-control" required
 					id="exampleFormControlinput1" name="description"></input>
 			</div>
 			<footer>
 				<button type="submit" name="button" value="submit"
 					class="btn btn-primary">Submit</button>
-				<button type="submit" name="button" value="cancel"
-					class="btn btn-primary">Cancel</button>
 			</footer>
 		</form>
 	</section>

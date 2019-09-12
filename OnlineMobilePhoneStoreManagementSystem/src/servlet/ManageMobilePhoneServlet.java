@@ -32,11 +32,9 @@ public class ManageMobilePhoneServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-		System.out.println("Hello from ManageMobilePhone GET method");
+		System.out.println("Hello from GET method in ManageMobilePhoneServlet");
 		List<MobilePhone> allMobilePhones = new ArrayList<MobilePhone>();
 		MobilePhoneService ms= new MobilePhoneService();		
-
 		allMobilePhones = ms.getAllMobilePhone();
 		response.getWriter().append("Served at: ").append(request.getContextPath());
 		response.setContentType("text/html");		
@@ -48,19 +46,19 @@ public class ManageMobilePhoneServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		System.out.println("Hello from POST method in ManageMobilePhoneServlet");
 		MobilePhoneService ms= new MobilePhoneService();		
 		MobilePhone m = new MobilePhone();
 		List<MobilePhone> result = new ArrayList<MobilePhone>();
-
 		if(request.getParameter("update") != null){
 			String updateId = request.getParameter("update");
-			m.setId(Integer.valueOf(updateId));
+			m.setMobilePhoneId(Integer.valueOf(updateId));
 			result = ms.getMobilePhone(m);
 			request.setAttribute("mobile", result);
 			request.getRequestDispatcher("UpdateMobilePhoneInfo.jsp").forward(request, response); 
 		} else {
 			String deleteId = request.getParameter("delete");
-			m.setId(Integer.valueOf(deleteId));
+			m.setMobilePhoneId(Integer.valueOf(deleteId));
 			result = ms.getMobilePhone(m);
 			request.setAttribute("mobile", result);
 			request.getRequestDispatcher("DeleteConfirm.jsp").forward(request, response); 
