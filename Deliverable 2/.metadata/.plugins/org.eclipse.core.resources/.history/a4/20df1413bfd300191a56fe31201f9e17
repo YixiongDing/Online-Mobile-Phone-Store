@@ -1,0 +1,24 @@
+package domain;
+
+import java.util.Date;
+
+public class Order extends DomainObject {
+	
+	private int orderId;
+	private Date createTime;
+	private String status;
+	private MobilePhone mobilePhone;
+	private Customer customer;
+
+	public Order() {
+		
+	}
+	
+	public Order(MobilePhone mobilePhone, Customer customer, String status) {
+		super();
+		this.mobilePhone = mobilePhone;
+		this.customer = customer;
+		this.status = status;
+	}
+
+}

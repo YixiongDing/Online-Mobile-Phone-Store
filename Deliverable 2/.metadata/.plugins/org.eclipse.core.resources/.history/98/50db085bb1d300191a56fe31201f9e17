@@ -1,0 +1,28 @@
+package DataMapper;
+
+import domain.DomainObject;
+
+public class CustomerMapper extends DataMapper {
+	
+	@Override
+	public boolean insert(DomainObject obj) {
+	}
+	
+	@Override
+	public boolean delete(DomainObject obj) {
+		
+	}
+	
+	
+	@Override
+	public boolean update (DomainObject obj) {
+		
+		
+		
+	}
+
+
+	
+}
+
+

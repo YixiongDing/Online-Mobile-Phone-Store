@@ -1,0 +1,42 @@
+package DataMapper;
+
+import database.DBConnection;
+import java.sql.*;
+
+
+import domain.DomainObject;
+import domain.Order;
+
+public class OrderMapper extends DataMapper {
+	
+	private static final String insertOrderStatement = 
+			"INSERT INTO Order "
+					+ "(orderId, createTime, status, mobilePhone, customer)"
+					+ " VALUES (?, ?, ?, ?, ?);";
+	
+	@Override
+	public boolean insert(DomainObject obj) {
+		Order order = (Order) obj;
+		int result = 0;
+		try {
+			Connection dbConnection = DBConnection.getDBConnection();
+			PreparedStatement findStatement = DBConnection.prepare(insertOrderStatement, dbConnection);
+			findStatement.setLong(1, order.getOrderId());
+			findStatement.setTimestamp(2, new Timestamp(order.getCreateTime().getTime()));
+			findStatement.setString(3, order.getStatus());
+			findStatement.setInt(4, order.getMobilePhone().getMobileId());
+			findStatement.setInt(5, order.getCustomer().getCustomerId());
+
+			result = findStatement.executeUpdate();
+			DBConnection.closePreparedStatement(findStatement);
+			DBConnection.closeConnection(dbConnection);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (result == 0)
+			return false;
+		else 
+			return true;
+	}
+
+}

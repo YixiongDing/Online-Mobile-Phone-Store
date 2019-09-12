@@ -1,0 +1,26 @@
+package domain;
+
+
+public class User {
+	
+	private String name;
+	private String userType;
+	private int userId;
+	
+	
+	public User(int userId, String name, String email, String userType) {
+        this.userId = userId;
+        this.name = name;
+        this.userType = userType;
+
+    }
+	
+	public int getUserId() {
+		return userId;
+	}
+    
+	
+	public void setUserId(int userId) {
+		this.userId = userId;
+	}
+}

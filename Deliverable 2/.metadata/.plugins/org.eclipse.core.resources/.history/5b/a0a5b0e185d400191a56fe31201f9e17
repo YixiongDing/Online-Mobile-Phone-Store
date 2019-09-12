@@ -1,0 +1,39 @@
+package domain;
+
+public class Model {
+
+	private String modelName;
+	
+	private int storageSize;
+	
+	private String color;
+	
+	
+	
+	public Model(String modelName,int storageSize,String color) {
+		this.modelName = modelName;
+		this.storageSize = storageSize;
+		this.color = color;
+		
+		
+		
+	}
+	
+	
+	public String getModelName() {
+		
+		return modelName;
+		
+		
+	}
+	
+public void setModelName() {
+		
+		this.modelName = modelName;
+		
+		
+	}
+	
+	
+	
+}

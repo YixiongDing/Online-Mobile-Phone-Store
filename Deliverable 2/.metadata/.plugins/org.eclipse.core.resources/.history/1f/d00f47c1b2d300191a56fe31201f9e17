@@ -1,0 +1,74 @@
+package domain;
+
+public class Customer extends DomainObject {
+
+	private int customerId;
+
+    private String name;
+
+    private String email;
+    
+    private String address;
+   
+    private float price;
+    
+    private int qty;
+
+    public MobilePhone(int mobilePhjoneId, String brand, String model, float price, int qty) {
+        this.mobilePhjoneId = mobilePhjoneId;
+        this.brand = brand;
+        this.model = model;
+        this.price = price;
+        this.setQty (qty);
+    }
+    
+	@Override
+	public String getId() {
+		return String.valueOf(this.mobilePhjoneId);
+	}
+
+    public MobilePhone() {
+	}
+
+	public int getMobileId() {
+        return mobilePhjoneId;
+    }
+
+    public void setId(int mobilePhjoneId) {
+        this.mobilePhjoneId = mobilePhjoneId;
+    }
+
+    public String getBrand() {
+        return brand;
+    }
+
+    public void setBrand(String brand) {
+        this.brand = brand;
+    }
+
+    public String getModel() {
+        return model;		
+    }
+
+    public void setModel(String model) {
+        this.model = model;
+    }
+
+
+	public float getPrice() {
+		return price;
+	}
+
+	public void setPrice(float price) {
+		this.price = price;
+	}
+
+	public int getQty() {
+		return qty;
+	}
+
+	public void setQty(int qty) {
+		this.qty = qty;
+	}
+}
+

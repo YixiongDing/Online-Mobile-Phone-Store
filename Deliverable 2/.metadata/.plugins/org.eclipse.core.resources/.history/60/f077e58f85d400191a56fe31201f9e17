@@ -1,0 +1,13 @@
+package domain;
+
+public class Model {
+
+	private String modelName;
+	
+	private int storageSize;
+	
+	private String color;
+	
+	
+	
+}

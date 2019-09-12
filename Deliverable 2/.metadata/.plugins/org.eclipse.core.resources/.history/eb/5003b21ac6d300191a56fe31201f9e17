@@ -1,0 +1,100 @@
+package DataMapper;
+
+import database.DBConnection;
+import java.sql.*;
+
+
+import domain.DomainObject;
+import domain.Order;
+
+public class OrderMapper extends DataMapper {
+	
+	private static final String insertOrderStatement = 
+			"INSERT INTO Order "
+					+ "(orderId, createTime, status, mobilePhoneId, customerId)"
+					+ " VALUES (?, ?, ?, ?, ?);";
+	
+	private static final String updateOrderStatement =
+			"UPDATE Order SET "
+					+ "createTime=?, status=?, mobilePhoneId=?, customerId=? "
+					+ "WHERE orderId=?";
+	
+	private static final String deleteOrderStatement = 
+			"DELETE FROM Order WHERE orderId = ?";
+	
+	@Override
+	public boolean insert(DomainObject obj) {
+		Order order = (Order) obj;
+		int result = 0;
+		try {
+			Connection dbConnection = DBConnection.getDBConnection();
+			PreparedStatement findStatement = DBConnection.prepare(insertOrderStatement, dbConnection);
+			findStatement.setLong(1, order.getOrderId());
+			findStatement.setTimestamp(2, new Timestamp(order.getCreateTime().getTime()));
+			findStatement.setString(3, order.getStatus());
+			findStatement.setInt(4, order.getMobilePhone().getMobileId());
+			findStatement.setInt(5, order.getCustomer().getCustomerId());
+
+			result = findStatement.executeUpdate();
+			DBConnection.closePreparedStatement(findStatement);
+			DBConnection.closeConnection(dbConnection);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (result == 0)
+			return false;
+		else 
+			return true;
+	}
+	
+	@Override
+	public boolean update (DomainObject obj) {
+		Order order = (Order)obj;
+		int result = 0;
+		try {
+			Connection dbConnection = DBConnection.getDBConnection();
+			PreparedStatement findStatement = DBConnection.prepare(updateOrderStatement, dbConnection);
+			findStatement.setTimestamp(1, new Timestamp(order.getCreateTime().getTime()));
+			findStatement.setString(2, order.getStatus());
+			findStatement.setInt(3, order.getMobilePhone().getMobileId());
+			findStatement.setInt(4, order.getCustomer().getCustomerId());
+
+			
+			findStatement.setInt(5, order.getOrderId());
+			
+			result = findStatement.executeUpdate();
+			DBConnection.closePreparedStatement(findStatement);
+			DBConnection.closeConnection(dbConnection);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (result == 0)
+			return false;
+		else 
+			return true;
+	}
+	
+	@Override
+	public boolean delete(DomainObject obj) {
+		Order order = (Order) obj;
+		String deleteOrderById = 
+		int result = 0;
+		try {
+			Connection conn = DBConnection.getConnection();
+			PreparedStatement pStatement = (PreparedStatement) conn.prepareStatement(deleteOrderById);
+			pStatement.setLong(1, order.getOrderId());
+			
+			result = pStatement.executeUpdate();
+			DBConnection.closePreparedStatement(pStatement);
+			DBConnection.closeConnection(conn);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (result == 0)
+			return false;
+		else 
+			return true;
+	}
+	
+}

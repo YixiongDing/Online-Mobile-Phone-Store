@@ -1,0 +1,149 @@
+package DataMapper;
+
+import database.DBConnection;
+import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
+
+import domain.DomainObject;
+import domain.Order;
+
+public class OrderMapper extends DataMapper {
+	
+	private static final String insertOrderStatement = 
+			"INSERT INTO Order "
+					+ "(orderId, createTime, status, mobilePhoneId, customerId)"
+					+ " VALUES (?, ?, ?, ?, ?);";
+	
+	private static final String updateOrderStatement =
+			"UPDATE Order SET "
+					+ "createTime=?, status=?, mobilePhoneId=?, customerId=? "
+					+ "WHERE orderId=?";
+	
+	private static final String deleteOrderStatement = 
+			"DELETE FROM Order WHERE orderId = ?";
+	
+	private final static String findOrderStatement =
+			"SELECT * from fuhnw47e9sr8fzla.Order WHERE orderId = ?"
+	
+	@Override
+	public boolean insert(DomainObject obj) {
+		Order order = (Order) obj;
+		int result = 0;
+		try {
+			Connection dbConnection = DBConnection.getDBConnection();
+			PreparedStatement findStatement = DBConnection.prepare(insertOrderStatement, dbConnection);
+			findStatement.setLong(1, order.getOrderId());
+			findStatement.setTimestamp(2, new Timestamp(order.getCreateTime().getTime()));
+			findStatement.setString(3, order.getStatus());
+			findStatement.setInt(4, order.getMobilePhone().getMobileId());
+			findStatement.setInt(5, order.getCustomer().getCustomerId());
+
+			result = findStatement.executeUpdate();
+			DBConnection.closePreparedStatement(findStatement);
+			DBConnection.closeConnection(dbConnection);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (result == 0)
+			return false;
+		else 
+			return true;
+	}
+	
+	@Override
+	public boolean update (DomainObject obj) {
+		Order order = (Order)obj;
+		int result = 0;
+		try {
+			Connection dbConnection = DBConnection.getDBConnection();
+			PreparedStatement findStatement = DBConnection.prepare(updateOrderStatement, dbConnection);
+			findStatement.setTimestamp(1, new Timestamp(order.getCreateTime().getTime()));
+			findStatement.setString(2, order.getStatus());
+			findStatement.setInt(3, order.getMobilePhone().getMobileId());
+			findStatement.setInt(4, order.getCustomer().getCustomerId());
+
+			
+			findStatement.setInt(5, order.getOrderId());
+			
+			result = findStatement.executeUpdate();
+			DBConnection.closePreparedStatement(findStatement);
+			DBConnection.closeConnection(dbConnection);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (result == 0)
+			return false;
+		else 
+			return true;
+	}
+	
+	@Override
+	public boolean delete(DomainObject obj) {
+		Order order = (Order) obj;
+		int result = 0;
+		try {
+			Connection dbConnection = DBConnection.getDBConnection();
+			PreparedStatement findStatement = DBConnection.prepare(deleteOrderStatement, dbConnection);
+			findStatement.setInt(1, order.getOrderId());
+			
+			result = findStatement.executeUpdate();
+			DBConnection.closePreparedStatement(findStatement);
+			DBConnection.closeConnection(dbConnection);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (result == 0)
+			return false;
+		else 
+			return true;
+	}
+	
+	public List<Order> findOrderByOrderId(Order order){
+		String findOrderByOrderId = ;
+		List<Order> result = new ArrayList<Order>();
+		try {
+			Connection dbConnection = DBConnection.getDBConnection();
+			PreparedStatement findStatement = DBConnection.prepare(findMobilePhoneStatement, dbConnection);
+			pStatement.setLong(1, order.getOrderId());
+			ResultSet resultSet = pStatement.executeQuery();
+			
+			while(resultSet.next()) {
+				Order o = new Order();
+				//get Identity Map for Order
+				utils.IdentityMap<Order> identityMap = utils.IdentityMap.getInstance(o);
+				
+				o.setOrderId(resultSet.getLong(1));
+				//set room
+				Room tempRoom = new Room();
+				tempRoom.setRoomId(resultSet.getInt(2));
+				RoomMapper rm = new RoomMapper();
+				o.setRoom(rm.findRoomById(tempRoom).get(0));
+				//set Customer
+				Customer tempCustomer = new Customer();
+				tempCustomer.setCustomerId(resultSet.getInt(3));
+				CustomerMapper cm = new CustomerMapper();
+				o.setCustomer(cm.findCustomerById(tempCustomer).get(0));
+				//set Timerange
+				TimeRange tempTR = new TimeRange();
+				tempTR.setCheckInTime(resultSet.getTimestamp(4));
+				tempTR.setCheckOutTime(resultSet.getTimestamp(5));
+				o.setTimerange(tempTR);
+				
+				o.setCreateTime(resultSet.getTimestamp(6));
+				o.setSum(resultSet.getFloat(7));
+				o.setStatus(resultSet.getString(8));
+				
+				//put order into identity map
+				identityMap.put(o.getOrderId(), o);
+				
+				result.add(o);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+}
