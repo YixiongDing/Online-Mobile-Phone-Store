@@ -33,8 +33,14 @@ public class AddMobilePhoneServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Hello from GET method in AddMobilePhoneServlet");
+		List<MobilePhone> allMobilePhones = new ArrayList<MobilePhone>();
+		MobilePhoneService ms= new MobilePhoneService();		
+		allMobilePhones = ms.getAllMobilePhone();
+		int size = allMobilePhones.size();
 		response.getWriter().append("Served at: ").append(request.getContextPath());
-		response.sendRedirect("AddMobilePhone.jsp");
+		response.setContentType("text/html");		
+		request.setAttribute("size", size);
+		request.getRequestDispatcher("AddMobilePhone.jsp").forward(request, response); 
 	}
 
 	/**
