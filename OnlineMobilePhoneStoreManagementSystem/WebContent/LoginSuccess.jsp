@@ -29,7 +29,7 @@
 			</a></li>
 			<li class="nav-item"><a class="nav-link"
 				href="ManageMobilePhoneServlet">Manage Mobile Phones</a></li>
-			<li class="nav-item"><a class="nav-link" href="#">Manage
+			<li class="nav-item"><a class="nav-link" href="ManageOrderServlet">Manage
 					Orders</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Manage
 					Customer Accounts</a></li>
@@ -95,7 +95,7 @@
 				<!-- Excerpt -->
 
 				<!-- Read more button -->
-				<a class="btn btn-info btn-rounded btn-md" href="#"> Manage </a>
+				<a class="btn btn-info btn-rounded btn-md" href="ManageOrderServlet"> Manage </a>
 			</div>
 			<!-- Grid column -->
 			<!-- Grid column -->

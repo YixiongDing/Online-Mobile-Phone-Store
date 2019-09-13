@@ -11,24 +11,24 @@ import java.util.List;
 public class CustomerMapper extends DataMapper {
 	
 	private static final String updateCustomerStatement =
-			"UPDATE Customer SET "
-					+ "name=?, email=?, address=? WHERE customerId=?";
+			"UPDATE users SET "
+					+ "name=?, email=?, address=? WHERE userid=?";
 	
 	private static final String insertCustomerStatement = 
-			"INSERT INTO Customer "
-			+ "(customerId, name, email, address)"
+			"INSERT INTO users "
+			+ "(userid, name, email, address)"
 			+ " VALUES (?, ?, ?, ?);";
 
 	
 	private static final String deleteCustomereStatement = 	
 			"DELETE " +
-			" FROM mobilephones " +
+			" FROM mobilephone " +
 			" WHERE id  = ? ";
 	private final static String findCustomerByIdStatement =
-			"SELECT * from Customer WHERE customerId = ?";
+			"SELECT * from users WHERE userid = ?";
 	
 	private final static String findCustomerByEmailStatement =
-			"SELECT * from Customer WHERE email = ?";
+			"SELECT * from users WHERE email = ?";
 	
 	@Override
 	public boolean insert(DomainObject obj) {
@@ -38,7 +38,7 @@ public class CustomerMapper extends DataMapper {
 			Connection dbConnection = DBConnection.getDBConnection();
 			PreparedStatement findStatement = DBConnection.prepare(insertCustomerStatement, dbConnection);
 			findStatement.setInt(1, customer.getUserId());
-			findStatement.setString(2, customer.getname());
+			findStatement.setString(2, customer.getCustomerName());
 			findStatement.setString(3, customer.getEmail());
 			findStatement.setString(4, customer.getAddress());
 			
@@ -90,7 +90,7 @@ public class CustomerMapper extends DataMapper {
 			Connection dbConnection = DBConnection.getDBConnection();
 			PreparedStatement findStatement = DBConnection.prepare(updateCustomerStatement, dbConnection);
 			findStatement.setInt(1, customer.getUserId());
-			findStatement.setString(2, customer.getname());
+			findStatement.setString(2, customer.getCustomerName());
 			findStatement.setString(3, customer.getEmail());
 			findStatement.setString(4, customer.getAddress());
 			
@@ -120,7 +120,7 @@ public class CustomerMapper extends DataMapper {
 				Customer c = new Customer();
 				IdentityMap<Customer> identityMap = IdentityMap.getInstance(c);
 				c.setCustomerId(resultSet.getInt(1));
-				c.setname(resultSet.getString(2));
+				c.setCustomerName(resultSet.getString(2));
 				c.setEmail(resultSet.getString(3));
 				c.setAddress(resultSet.getString(4));
 				
@@ -145,7 +145,7 @@ public class CustomerMapper extends DataMapper {
 				Customer c = new Customer();
 				IdentityMap<Customer> identityMap = IdentityMap.getInstance(c);
 				c.setCustomerId(resultSet.getInt(1));
-				c.setname(resultSet.getString(2));
+				c.setCustomerName(resultSet.getString(2));
 				c.setEmail(resultSet.getString(3));
 				c.setAddress(resultSet.getString(4));
 				

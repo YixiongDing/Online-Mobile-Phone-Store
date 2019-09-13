@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
-<%@ page import="domain.MobilePhone"%>
+<%@ page import="domain.Order"%>
 
 <!DOCTYPE html>
 <html>
@@ -27,12 +27,11 @@
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item"><a class="nav-link" href="LoginSuccess.jsp">Dashboard</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="ManageMobilePhoneServlet">Manage Mobile Phones</a></li>
 			<li class="nav-item active"><a class="nav-link"
-				href="ManageMobilePhoneServlet">Manage Mobile Phones <span
-					class="sr-only">(current)</span>
+				href="ManageOrderServlet">Manage Orders <span class="sr-only">(current)</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="ManageOrderServlet">Manage
-					Orders</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Manage
 					Customer Accounts</a></li>
 		</ul>
@@ -48,50 +47,30 @@
 			<table class='table table-bordered table-striped'>
 				<tr>
 					<th>id</th>
-					<th>Model</th>
-					<th>Storage Size</th>
-					<th>Color</th>
-					<th>Brand</th>
-					<th>Price</th>
-					<th>Quantity</th>
+					<th>Create Time</th>
+					<th>Status</th>
+					<th>Mobile Id</th>
+					<th>Customer</th>
 					<th>Operation</th>
 				</tr>
 				<tbody>
 					<%
-						List<MobilePhone> mobiles = (ArrayList<MobilePhone>) request.getAttribute("mobiles");
+						List<Order> orders = (ArrayList<Order>) request.getAttribute("orders");
 
-						for (MobilePhone mobile : mobiles) {
-							out.println("<form action=\"ManageMobilePhoneServlet\" method=\"post\">");
-							out.print("<tr><td>" 
-									+ mobile.getMobilePhoneId() 
-									+ "</td><td>" 
-									+ mobile.getModelName() 
-									+"</td><td>"
-									+ mobile.getStorageSize()
-									+"</td><td>"
-									+ mobile.getColor()
-									+ "</td><td>"
-									+ mobile.getBrand() 
-									+ "</td><td>" 
-									+ mobile.getPrice() 
-									+ "</td><td>" 
-									+ mobile.getQty() 
-									+ "</td>"
-									+ "<td colspan=\"2\" align=\"center\">"
+						for (Order order : orders) {
+							out.println("<form action=\"ManageOrderServlet\" method=\"post\">");
+							out.print("<tr><td>" + order.getId() + "</td><td>" + order.getCreateTime() + "</td><td>"
+									+ order.getStatus() + "</td><td>" + order.getMobilePhone().getId() + "</td><td>"
+									+ order.getCustomer().getCustomerName() + "</td>" + "<td colspan=\"2\" align=\"center\">"
 									+ "<button style=\"margin: 0px 10px 0px 10px;\" type=\"submit\" name=\"update\" value=\""
-									+ mobile.getMobilePhoneId() + "\" class=\"btn btn-primary\">Update</button>"
+									+ order.getId() + "\" class=\"btn btn-primary\">Update</button>"
 									+ "<button style=\"margin: 0px 10px 0px 10px;\" type=\"submit\" name=\"delete\" value=\""
-									+ mobile.getMobilePhoneId() + "\" class=\"btn btn-primary\">Delete</button></td></tr>");
+									+ order.getId() + "\" class=\"btn btn-primary\">Cancel</button></td></tr>");
 							out.println("</form>");
 						}
 					%>
 				</tbody>
 			</table>
-			<form action="AddMobilePhoneServlet" method="get">
-				<button type="submit" name="insert" value="insert"
-					class="btn btn-primary">Add A New Mobile Phone</button>
-			</form>
-
 		</div>
 	</section>
 </body>

@@ -2,8 +2,6 @@ package domain;
 
 
 public class Customer extends  User {
-
-	
    
 
     public Customer(int userId, String name, String email, String address) {
@@ -22,29 +20,30 @@ public class Customer extends  User {
 		return ""+this.getUserId();
 	}
 	
-	public int getUserId() {
+	public int getCustomerId() {
 		return getUserId();
 	}
+	
 	public void setCustomerId(int userId) {
 		setUserId(userId);
 	}
-	public String getname() {
+	public String getCustomerName() {
 		return getName();
 	}
-	public void setname(String name) {
+	public void setCustomerName(String name) {
 		setName(name);
 	}
 
-	public String getEmail() {
+	public String getCustomerEmail() {
 		return getEmail();
 	}
-	public void setEmail(String email) {
+	public void setCustomerEmail(String email) {
 		setEmail(email);
 	}
-	public String getAddress() {
+	public String getCustomerAddress() {
 		return getAddress();
 	}
-	public void setAddress(String address) {
+	public void setCustomerAddress(String address) {
 		setAddress(address);
 	}
 	

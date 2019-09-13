@@ -26,7 +26,9 @@
 
 </nav>
 <body>
-	<% int newId = (Integer) request.getAttribute("size") + 1001; %>
+	<%
+		int newId = (Integer) request.getAttribute("size") + 1001;
+	%>
 	<a href="ManageMobilePhoneServlet" class="blue-text">
 		<h6 class="font-weight-bold mb-3" style="font-size: 20px;">
 			<i class="fas fa-fire pr-2"><- Manage Mobile Phones </i>
@@ -39,8 +41,8 @@
 			<div class="form-group">
 				<label for="exampleFormControlInput1" style="font-size: 15px">Id</label>
 				<input style="text-align: center;" class="form-control" readonly
-				<%out.println("value=\"" + newId + "\"");%>
-					type="number" id="exampleFormControlInput1" name="id"></input>
+					<%out.println("value=\"" + newId + "\"");%> type="number"
+					id="exampleFormControlInput1" name="id"></input>
 			</div>
 			<div class="form-group">
 				<label for="exampleFormControlinput1" style="font-size: 15px">Model

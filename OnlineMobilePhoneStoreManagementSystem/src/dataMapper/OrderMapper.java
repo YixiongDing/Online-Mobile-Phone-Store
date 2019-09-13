@@ -14,12 +14,12 @@ public class OrderMapper extends DataMapper {
 	
 	private static final String insertOrderStatement = 
 			"INSERT INTO Orders "
-					+ "(orderId, createTime, status, mobilePhoneId, customerId)"
+					+ "(orderId, createTime, status, mobilePhoneId, userid)"
 					+ " VALUES (?, ?, ?, ?, ?);";
 	
 	private static final String updateOrderStatement =
-			"UPDATE Order SET "
-					+ "createTime=?, status=?, mobilePhoneId=?, customerId=? "
+			"UPDATE Orders SET "
+					+ "createTime=?, status=?, mobilePhoneId=?, userid=? "
 					+ "WHERE orderId=?";
 	
 	private static final String deleteOrderStatement = 
@@ -29,7 +29,11 @@ public class OrderMapper extends DataMapper {
 			"SELECT * from Orders WHERE orderId = ?";
 	
 	private final static String findOrderByCustomerIdStatement =
-			 "SELECT * from Orders WHERE customerId = ?";
+			 "SELECT * from Orders WHERE userid = ?";
+	
+	private static final String findAllOrderStatement =
+			"SELECT * " + 
+					" FROM orders ";
 	
 	@Override
 	public boolean insert(DomainObject obj) {
@@ -175,12 +179,42 @@ public class OrderMapper extends DataMapper {
 				customer.setCustomerId(resultSet.getInt(5));
 				CustomerMapper cm = new CustomerMapper();
 				odr.setCustomer(cm.findCustomerById(customer).get(0));
-				
-				
+	
 				
 				//put order into identity map
 				identityMap.put(odr.getOrderId(), odr);
 				
+				result.add(odr);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
+	
+	public List<Order> findAllOrder(){
+		List<Order> result = new ArrayList<Order>();
+		try {
+			Connection dbConnection = DBConnection.getDBConnection();
+			PreparedStatement findStatement = DBConnection.prepare(findAllOrderStatement, dbConnection);
+			ResultSet rs = findStatement.executeQuery();
+
+			while(rs.next()) {
+				Order odr = new Order();
+				IdentityMap<Order> identityMap = IdentityMap.getInstance(odr);
+				odr.setOrderId(rs.getInt(1));
+				odr.setCreateTime(rs.getTimestamp(2));
+				odr.setStatus(rs.getString(3));
+
+				MobilePhone mobilePhone = new MobilePhone();
+				mobilePhone.setMobilePhoneId(rs.getInt(4));
+				MobilePhoneMapper mobilePhoneMapper = new MobilePhoneMapper();
+				odr.setMobilePhone(mobilePhoneMapper.findMobilePhone(mobilePhone).get(0));
+				Customer customer = new Customer();
+				customer.setCustomerId(rs.getInt(5));
+				CustomerMapper cm = new CustomerMapper();
+				odr.setCustomer(cm.findCustomerById(customer).get(0));				
+				identityMap.put(odr.getOrderId(), odr);
 				result.add(odr);
 			}
 		} catch (Exception e) {
