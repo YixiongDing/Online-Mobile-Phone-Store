@@ -1,57 +1,76 @@
 package domain;
-import database.MobileFinder;
-import database.MobileGateway;
 
-import java.util.ArrayList;
-import java.util.List;
+public class MobilePhone extends DomainObject{
 
-public class MobilePhone {
+	private int mobilePhoneId;
 
-	private String id;
+	private String brand;
 
-    private String brand;
+	private Model model;
 
-    private String model;
-   
-    private float price;
-    
-    private int qty;
+	private float price;
 
-    public MobilePhone(String id, String brand, String model, float price, int qty) {
-        this.id = id;
-        this.brand = brand;
-        this.model = model;
-        this.price = price;
-        this.setQty (qty);
-    }
+	private int qty;
 
-    public MobilePhone() {
+	private String description;
+
+	public MobilePhone(int mobilePhoneId, String brand, Model model, float price, int qty, String description) {
+		this.mobilePhoneId = mobilePhoneId;
+		this.brand = brand;
+		this.model = model;
+		this.price = price;
+		this.qty = qty;
+		this.description = description;
 	}
 
+	@Override
 	public String getId() {
-        return id;
-    }
+		return String.valueOf(this.mobilePhoneId);
+	}
 
-    public void setId(String id) {
-        this.id = id;
-    }
+	public MobilePhone() {
+		this.model = new Model();
+	}
 
-    public String getBrand() {
-        return brand;
-    }
+	public int getMobilePhoneId() {
+		return mobilePhoneId;
+	}
 
-    public void setBrand(String brand) {
-        this.brand = brand;
-    }
+	public void setMobilePhoneId(int mobilePhoneId) {
+		this.mobilePhoneId = mobilePhoneId;
+	}
 
-    public String getModel() {
-        return model;
-    }
+	public String getBrand() {
+		return brand;
+	}
 
-    public void setModel(String model) {
-        this.model = model;
-    }
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
 
+	public String getModelName() {
+		return model.getModelName();		
+	}
+
+	public void setModelName(String modelName) {
+		model.setModelName(modelName);
+	}
+
+	public String getStorageSize() {
+		return model.getStorageSize();		
+	}
+
+	public void setStorageSize(String storageSize) {
+		model.setStorageSize(storageSize);
+	}
+
+	public String getColor() {
+		return model.getColor();	
+	}
+
+	public void setColor(String color) {
+		model.setColor(color);;
+	}
 
 	public float getPrice() {
 		return price;
@@ -69,19 +88,11 @@ public class MobilePhone {
 		this.qty = qty;
 	}
 
+	public String getDescription() {
+		return description;		
+	}
 
-    public static List<MobilePhone> getAllAvailableMobiles() {
-        MobileFinder finder = new MobileFinder();
-        List<MobilePhone> result = new ArrayList<MobilePhone>();
-        List<MobileGateway> mobilesRecords = finder.findAvailableMobiles();
-
-        for (MobileGateway mr : mobilesRecords) {
-            MobilePhone mobilephone = new MobilePhone(String.valueOf(mr.getId()), mr.getBrand(), mr.getModel(), mr.getPrice(), mr.getQty());
-            result.add(mobilephone);
-        }
-
-        return result;
-
-    }
-
+	public void setDescription(String description) {
+		this.description = description;		
+	}
 }
