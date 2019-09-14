@@ -78,7 +78,7 @@
 						for (MobilePhone mobile : mobiless) {
 							out.println("<div class=\"column\">");
 							out.println("<div class=\"card\"\">");
-							out.println("<img src=\"Resources/mp-" + mobile.getMobilePhoneId()+".jpg\" class=\"card-img-top\" alt=\"this is no image for this mobile phone\">");
+							out.println("<img src=\"Resources/mp-" + mobile.getMobilePhoneId()+".jpg\" class=\"card-img-top\" alt=\"no image for this mobile phone\">");
 							out.println("<div class=\"card-body\">");
 							out.println("<h5 class=\"card-title\">"+mobile.getModelName()+"</h5>");
 							out.println("<p class=\"card-text\">"+mobile.getDescription()+"</p>");
