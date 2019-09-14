@@ -4,14 +4,14 @@ import java.sql.*;
 
 public class DBConnection {
 	
-//	private static final String DB_CONNECTION = "jdbc:postgresql://"+"ec2-107-20-230-70.compute-1.amazonaws.com:5432"
-//								+"/d6ivkt4itip8g7?sslmode=require";
-//	private static final String DB_USER = "hsummenpuzwipk";
-//	private static final String DB_PASSWORD = "8d9582ad16774861511f05fa48caf5a089a62168fabda3591874b44e28e95d00";
+	private static final String DB_CONNECTION = "jdbc:postgresql://"+"ec2-107-20-230-70.compute-1.amazonaws.com:5432"
+								+"/d6ivkt4itip8g7?sslmode=require";
+	private static final String DB_USER = "hsummenpuzwipk";
+	private static final String DB_PASSWORD = "8d9582ad16774861511f05fa48caf5a089a62168fabda3591874b44e28e95d00";
 	
-	private static final String DB_CONNECTION = "jdbc:postgresql://localhost:5432/mobilephonestore";
-	private static final String DB_USER = "postgres";
-	private static final String DB_PASSWORD = "Dingyixiong28";
+//	private static final String DB_CONNECTION = "jdbc:postgresql://localhost:5432/mobilephonestore";
+//	private static final String DB_USER = "postgres";
+//	private static final String DB_PASSWORD = "Dingyixiong28";
 	
 	
 	private static ThreadLocal<Connection> current = new ThreadLocal<Connection>();
