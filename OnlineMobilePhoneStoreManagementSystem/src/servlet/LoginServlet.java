@@ -30,7 +30,6 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Hello from GET method in LoginServlet");
-		response.setContentType("text/html");
 		response.sendRedirect("LoginPage.jsp");
 	}
 
@@ -39,7 +38,6 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Hello from Post method in LoginServlet");
-		response.setContentType("text/html");
 		String user = request.getParameter("userName");
 		String pass = request.getParameter("passWord");
 		String correctUser = getServletConfig().getInitParameter("userNameI");

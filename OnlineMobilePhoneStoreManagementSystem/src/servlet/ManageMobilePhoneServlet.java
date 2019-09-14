@@ -36,8 +36,6 @@ public class ManageMobilePhoneServlet extends HttpServlet {
 		List<MobilePhone> allMobilePhones = new ArrayList<MobilePhone>();
 		MobilePhoneService ms= new MobilePhoneService();		
 		allMobilePhones = ms.getAllMobilePhone();
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		response.setContentType("text/html");		
 		request.setAttribute("mobiles", allMobilePhones);
 		request.getRequestDispatcher("ManageMobilePhone.jsp").forward(request, response); 
 	}

@@ -30,7 +30,6 @@ public class UpdateMobilePhoneInfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Hello from GET method in UpdateMobilePhoneInfoServlet");
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

@@ -9,11 +9,11 @@
     <servlet-class>servlet.LoginServlet</servlet-class>
     <init-param>
       <param-name>userNameI</param-name>
-      <param-value>123</param-value>
+      <param-value>Admin</param-value>
     </init-param>
     <init-param>
       <param-name>passWordI</param-name>
-      <param-value>123</param-value>
+      <param-value>Admin</param-value>
     </init-param>
   </servlet>
   <servlet-mapping>

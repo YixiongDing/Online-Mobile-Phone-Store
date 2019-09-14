@@ -33,7 +33,6 @@ public class DeleteMobilePhoneServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Hello from GET method in DeleteMobilePhoneServlet");
-		response.getWriter().append("Served at: ").append(request.getContextPath());
 	}
 
 	/**

@@ -25,7 +25,7 @@
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item"><a class="nav-link" href="HomePageServlet">Home</a></li>
-			<li class="nav-item"><a class="nav-link" href="ViewMobilePhones">All
+			<li class="nav-item"><a class="nav-link" href="ViewMobilePhonesServlet">All
 					Mobile Phones</a></li>
 		</ul>
 	</div>

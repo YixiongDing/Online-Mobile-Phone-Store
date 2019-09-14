@@ -37,8 +37,6 @@ public class AddMobilePhoneServlet extends HttpServlet {
 		MobilePhoneService ms= new MobilePhoneService();		
 		allMobilePhones = ms.getAllMobilePhone();
 		int size = allMobilePhones.size();
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		response.setContentType("text/html");		
 		request.setAttribute("size", size);
 		request.getRequestDispatcher("AddMobilePhone.jsp").forward(request, response); 
 	}

@@ -16,7 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class ViewMobilePhones
  */
-@WebServlet("/ViewMobilePhones")
+@WebServlet("/ViewMobilePhonesServlet")
 public class ViewMobilePhonesServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
@@ -36,8 +36,6 @@ public class ViewMobilePhonesServlet extends HttpServlet {
 		List<MobilePhone> allMobilePhones = new ArrayList<MobilePhone>();
 		MobilePhoneService ms= new MobilePhoneService();		
 		allMobilePhones = ms.getAllMobilePhone();
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		response.setContentType("text/html");		
 		request.setAttribute("mobiles", allMobilePhones);
 		request.getRequestDispatcher("ViewMobilePhones.jsp").forward(request, response); 
 	}

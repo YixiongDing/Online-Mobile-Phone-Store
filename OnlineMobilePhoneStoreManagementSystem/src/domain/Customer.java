@@ -1,7 +1,7 @@
 package domain;
 
 
-public class Customer extends  User {
+public class Customer extends User {
    
 
     public Customer(int userId, String name, String email, String address) {

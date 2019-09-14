@@ -38,7 +38,7 @@
 			<li class="nav-item active"><a class="nav-link"
 				href="HomePageServlet">Home <span class="sr-only">(current)</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="ViewMobilePhones">All
+			<li class="nav-item"><a class="nav-link" href="ViewMobilePhonesServlet">All
 					Mobile Phones</a></li>
 		</ul>
 		<div class="nav-item  my-2 my-lg-0">

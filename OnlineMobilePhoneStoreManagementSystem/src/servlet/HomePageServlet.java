@@ -37,10 +37,8 @@ public class HomePageServlet extends HttpServlet {
 		MobilePhoneService ms= new MobilePhoneService();
 		List<MobilePhone> allMobilePhones = new ArrayList<MobilePhone>();
 		allMobilePhones = ms.getAllMobilePhone();	
-		response.getWriter().append("Served at: ").append(request.getContextPath());
-		response.setContentType("text/html");		
 		request.setAttribute("mobiles", allMobilePhones);
-		request.getRequestDispatcher("index.jsp").forward(request, response); 
+		request.getRequestDispatcher("HomePage.jsp").forward(request, response); 
 	}
 
 	/**
