@@ -1,7 +1,0 @@
-INDEX VERSION 1.4+/Users/lawrence_luo/Desktop/unimelb/Software Design and Architecture/Software-Design-and-Architecture-Project/Deliverable 2/.metadata/.plugins/org.eclipse.wst.jsdt.core/indexes
-3226676403.index
-3951220689.index
-2915609081.index
-2604127128.index
-1992738882.index
-186752507.index
