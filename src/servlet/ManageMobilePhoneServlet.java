@@ -1,4 +1,4 @@
-	package servlet;
+package servlet;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,7 +34,7 @@ public class ManageMobilePhoneServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Hello from GET method in ManageMobilePhoneServlet");
 		List<MobilePhone> allMobilePhones = new ArrayList<MobilePhone>();
-		MobilePhoneService ms= new MobilePhoneService();	
+		MobilePhoneService ms= new MobilePhoneService();		
 		allMobilePhones = ms.getAllMobilePhone();
 		request.setAttribute("mobiles", allMobilePhones);
 		request.getRequestDispatcher("ManageMobilePhone.jsp").forward(request, response); 

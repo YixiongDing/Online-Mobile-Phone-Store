@@ -27,13 +27,11 @@ CREATE TABLE Users(
    name VARCHAR(50),
    email VARCHAR(100),
    address VARCHAR(100),
-   userType VARCHAR(50),
-   password VARCHAR(100),
    PRIMARY KEY(UserId)
    );
  
-INSERT INTO Users VALUES (2001, 'Albert Einstein', 'albert.einstein@ias.edu', 'Office 9, IAS, Princeton, USA','ADMIN');
-INSERT INTO Users VALUES (2002, 'James Bond', 'jbond@ghcq.uk', 'Queen Street 9,Chelsea 338, London','CUSTOMER');
+INSERT INTO Users VALUES (2001, 'Albert Einstein', 'albert.einstein@ias.edu', 'Office 9, IAS, Princeton, USA');
+INSERT INTO Users VALUES (2002, 'James Bond', 'jbond@ghcq.uk', 'Queen Street 9,Chelsea 338, London');
 
 
 CREATE TABLE Orders(

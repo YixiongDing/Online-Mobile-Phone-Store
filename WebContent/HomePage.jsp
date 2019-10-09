@@ -42,8 +42,19 @@
 					Mobile Phones</a></li>
 		</ul>
 		<div class="nav-item  my-2 my-lg-0">
-			<a class="nav-link" href="LoginServlet">Hello! Please Login</a>
-		</div>
+		<%
+		Cookie ck[]=request.getCookies();  
+		if(ck!=null){  
+			String name=ck[0].getValue();  
+			if(!name.equals("")||name!=null){  
+				out.println("<p>Welcome,"+name+"</p>");
+			}  
+		}else{  
+			out.println("<a class=\"nav-link\" href=\"LoginServlet\">Hello! Please Login</a>");
+		}  
+		%>
+<!-- 			<a class="nav-link" href="LoginServlet">Hello! Please Login</a>
+ -->		</div>
 	</div>
 </nav>
 <body>

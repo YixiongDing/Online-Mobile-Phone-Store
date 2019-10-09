@@ -46,6 +46,7 @@
 					placeholder="Enter Password">
 			</div>
 			<button type="submit" class="btn btn-primary">Login</button>
+			<a class="btn btn-primary" href="RegisterNewAccountServlet" role="button">Register</a>
 		</form>
 	</section>
 </body>

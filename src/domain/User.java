@@ -1,10 +1,6 @@
 package domain;
 
 
-import dataMapper.AdministratorMapper;
-import dataMapper.CustomerMapper;
-
-
 public class User extends DomainObject {
 	
 	private String name;
@@ -13,15 +9,14 @@ public class User extends DomainObject {
 	private String email;
 	private String address;
 	private String password;
-
 	
-	public User(int userId, String name,String email,String address,String userType) {
+	public User(int userId, String name, String userType, String email, String address, String password) {
         this.userId = userId;
         this.name = name;
         this.userType = userType;
         this.email=email;
         this.address = address;
-
+        this.password = password;
     }
 	
 	
@@ -29,7 +24,6 @@ public class User extends DomainObject {
 		
 		
 	}
-	
 	
 	public int getUserId() {
 		return userId;
@@ -61,45 +55,24 @@ public class User extends DomainObject {
 	public String getEmail() {
 		return email;
 	}
+	
 	public void setEmail(String email) {
 		this.email = email;
 	}
+	
 	public String getAddress() {
 		return address;
 	}
+	
 	public void setAddress(String address) {
 		this.address = address;
-	}
-
-
-	public void setPassword(String password) {
-		this.password = password;
-		
 	}
 	
 	public String getPassword() {
 		return password;
-		
 	}
 	
-	public static User getUser(String username) {
-		
-		Administrator admin = AdministratorMapper.getAdminByName(username);
-		Customer customer = CustomerMapper.getCustomerByName(username);
-		
-		
-		if( admin != null) {
-			
-			return admin;
-		}else if(customer != null) {
-			
-			return customer;
-		}
-		
-		return null;
-		
-		
+	public void setPassword(String password) {
+		this.password = password;
 	}
-
-	
 }

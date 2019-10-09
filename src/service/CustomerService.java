@@ -7,6 +7,7 @@ import dataMapper.CustomerMapper;
 import dataMapper.IdentityMap;
 import dataMapper.UnitOfWork;
 import domain.Customer;
+import domain.MobilePhone;
 
 public class CustomerService {
 	
@@ -56,6 +57,10 @@ public class CustomerService {
 		}
 		//if not in the identity map
 		return customerMapper.findCustomerByEmail(customer);
+	}
+	
+	public List<Customer> getAllCustomer() {
+		return customerMapper.findAllCustomer();
 	}
 	
 

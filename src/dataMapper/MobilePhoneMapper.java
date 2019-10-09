@@ -40,8 +40,7 @@ public class MobilePhoneMapper extends DataMapper{
 					" FROM mobilephone " +
 					" WHERE mobilephoneid  = ? ";
 	
-	
-	
+
 	public List<MobilePhone> findMobilePhone(MobilePhone mobile) {
 
 		List<MobilePhone> result = new ArrayList<MobilePhone>();
@@ -124,9 +123,6 @@ public class MobilePhoneMapper extends DataMapper{
 		}
 		return result;
 	}
-	
-
-	
 
 	@Override
 	public boolean update(DomainObject obj) {

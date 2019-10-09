@@ -4,8 +4,8 @@ package domain;
 public class Customer extends User {
    
 
-    public Customer(int userId, String name, String email, String address) {
-    	super(userId,name,email,address,"CUSTOMER");
+    public Customer(int userId, String name, String email, String address, String password) {
+    	super(userId, name, "Customer", email, address, password);
 
     }
     
@@ -27,9 +27,11 @@ public class Customer extends User {
 	public void setCustomerId(int userId) {
 		setUserId(userId);
 	}
+	
 	public String getCustomerName() {
 		return getName();
 	}
+	
 	public void setCustomerName(String name) {
 		setName(name);
 	}
@@ -37,14 +39,25 @@ public class Customer extends User {
 	public String getCustomerEmail() {
 		return getEmail();
 	}
+	
 	public void setCustomerEmail(String email) {
 		setEmail(email);
 	}
-	public String getCustomerAddress() {
+	
+	public String getCustomerPostAddress() {
 		return getAddress();
 	}
-	public void setCustomerAddress(String address) {
+	
+	public void setCustomerPostAddress(String address) {
 		setAddress(address);
+	}
+	
+	public String getCustomerPassword() {
+		return getPassword(); 
+	}
+	
+	public void setCustomerPassword(String password) {
+		setPassword(password);
 	}
 	
 	
