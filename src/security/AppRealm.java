@@ -22,19 +22,11 @@ public class AppRealm extends JdbcRealm {
 		final User user = User.getUser(username);
 		if(user==null) {
 			System.out.println("No account for user with username"+ username);
-			return null;
-			
+			return null;		
 		}
-		
-		
+			
 		return new SimpleAuthenticationInfo(user.getUserId(), user.getPassword(), getName());
-		
-		
-
 	}
-	
-	
-	
 	
 	@Override
 	protected AuthorizationInfo getAuthorizationInfo(PrincipalCollection principals) {

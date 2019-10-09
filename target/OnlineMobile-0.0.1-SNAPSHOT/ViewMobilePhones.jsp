@@ -89,7 +89,7 @@
 
 						for (MobilePhone mobile : mobiles) {
 							out.println("<form action=\"cart\" method=\"post\">");
-							out.print("<tr><td>" + mobile.getId() + "</td><td>" + mobile.getModel() + "</td><td>"
+							out.print("<tr><td>" + mobile.getId() + "</td><td>" + mobile.getModelName() + "</td><td>"
 									+ mobile.getBrand() + "</td><td>" + mobile.getPrice() + "</td>"
 									+ "<td colspan=\"2\" align=\"center\"><button type=\"submit\" name=\"isbn\" value=\""
 									+ mobile.getId() + "\" class=\"btn btn-default\">Add to Cart</button></td></tr>");
@@ -108,7 +108,7 @@
 							out.println("<div class=\"card\"\">");
 							out.println("<img src=\"Resources/apple-iphone-xs-max-gold.jpg\" class=\"card-img-top\" alt=\"...\">");
 							out.println("<div class=\"card-body\">");
-							out.println("<h5 class=\"card-title\">"+mobile.getModel()+"</h5>");
+							out.println("<h5 class=\"card-title\">"+mobile.getModelName()+"</h5>");
 							out.println("<p class=\"card-text\">Some quick example text to build on the card title and make up the bulk of the cards content.</p>");
 							out.println("<a href=\"#\" class=\"btn btn-primary\">View Detail</a>");
 							out.println("</div></div></div>");
