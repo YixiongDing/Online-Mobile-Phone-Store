@@ -21,7 +21,7 @@ public class AppRealm extends JdbcRealm {
 		
 		final User user = User.getUser(username);
 		if(user==null) {
-			System.out.println("No account for user with username"+ username);
+			System.out.println("No account for user with username "+ username);
 			return null;		
 		}
 			
@@ -42,7 +42,7 @@ public class AppRealm extends JdbcRealm {
 		
 		if(user == null) {
 			
-			System.out.println("No account found for user with username" + username);
+			System.out.println("No account found for user with username " + username);
 			return null;
 			
 			

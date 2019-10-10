@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="security.AppSession"%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -25,13 +27,16 @@
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item"><a class="nav-link" href="HomePageServlet">Home</a></li>
-			<li class="nav-item"><a class="nav-link" href="ViewMobilePhonesServlet">All
-					Mobile Phones</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="ViewMobilePhonesServlet">All Mobile Phones</a></li>
 		</ul>
 	</div>
 </nav>
 <body>
 	<section class="container text-center">
+		<%
+			if (!AppSession.isAuthenticated()) {
+		%>
 		<form action="LoginServlet" method="post"
 			style="margin-left: auto; margin-right: auto; margin-top: 100px; width: 20%;">
 			<div class="form-group">
@@ -47,6 +52,24 @@
 			</div>
 			<button type="submit" class="btn btn-primary">Login</button>
 		</form>
+		<%
+			} else {
+		%>
+		<div style="margin-left: auto; margin-right: auto; margin-top: 200px;">
+			<h1 class="h1-responsive font-weight-bold text-center my-5">
+				Welcome, You have already login</h1>
+		</div>
+		<form action="LogoutControllerServlet" method="post">
+			<div class="form-group">
+				<label for="exampleInputPassword1"></label> <input type="hidden"
+					class="form-control" style="text-align: center;" name="logout"
+					value="logout">
+			</div>
+			<button type="submit" class="btn btn-primary">Logout</button>
+		</form>
+		<%
+			}
+		%>
 	</section>
 </body>
 </html>

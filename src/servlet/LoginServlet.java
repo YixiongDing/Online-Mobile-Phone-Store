@@ -40,7 +40,7 @@ public class LoginServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Hello from GET method in LoginServlet");
-		String view ="LoginPage.jsp";
+		String view ="/LoginPage.jsp";
 		
 		ServletContext servletContext = getServletContext();
 		RequestDispatcher requestDispathcer = servletContext.getRequestDispatcher(view);
@@ -54,24 +54,22 @@ public class LoginServlet extends HttpServlet {
 		System.out.println("Hello from Post method in LoginServlet");
 		String username = request.getParameter("userName");
 		String password = request.getParameter("passWord");
+		String logout = request.getParameter("logout");
 		
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 		token.setRememberMe(true);
 		
-		Subject currentUser = SecurityUtils.getSubject();
-		String view = "index.jsp";
+		Subject currentUser = SecurityUtils.getSubject();	
+		String view = "/LoginPage.jsp";
 		
 		try {
-			
 			currentUser.login(token);
-			view = "LoginSuccess.jsp";
+			view = "/AdminDashboardControllerServlet";
 			User user = User.getUser(username);
 			AppSession.init(user);
 		}catch (UnknownAccountException | IncorrectCredentialsException e) {
-			
-			view = "LoginFail.jsp";
+			view = "/LoginFail.jsp";
 		}finally {
-			
 			ServletContext servletContext = getServletContext();
 			RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(view);
 			requestDispatcher.forward(request,response);

@@ -2,21 +2,21 @@ package domain;
 
 public class Administrator extends User {
 
-	public Administrator(int userId, String name, String userType, String email, String address) {
-		super(userId,name,email,address,"ADMIN");
+	public Administrator(int userId, String name, String email, String address, String password) {
+		super(userId,name,email,address,"ADMIN",password);
 	}
 
-	 public Administrator() {
-	    	super();
-	    	
-	    	
-	    }
-	
+	public Administrator() {
+		super();
+
+
+	}
+
 	@Override
 	public String getId() {
 		return ""+this.getUserId();
 	}
-	
+
 	public int getAdministratorId() {
 		return getUserId();
 	}
@@ -42,4 +42,18 @@ public class Administrator extends User {
 	public void setAdministratorAddress(String address) {
 		setAddress(address);
 	}
+
+	public String getAdministratorPassword() {
+		return getPassword();
+	}
+	public void setAdministratorPassword(String password) {
+		setPassword(password);
+	}
+	public String getAdministratorUserType() {
+		return getUserType();
+	}
+	public void setAdministratorUserType(String usertype) {
+		setUserType(usertype);
+	}
+
 }

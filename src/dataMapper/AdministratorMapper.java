@@ -9,31 +9,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class AdministratorMapper extends DataMapper {
-	
+
 	private static final String updateAdministratorStatement =
 			"UPDATE users SET "
-					+ "name=?, email=?, address=? WHERE userid=? AND userType=ADMIN";
-	
+					+ "name=?, email=?, address=?, password=? WHERE userid=? AND userType=ADMIN";
+
 	private static final String insertAdministratorStatement = 
 			"INSERT INTO users "
-			+ "(userid, name, email, address,userType)"
-			+ " VALUES (?, ?, ?, ?, ADMIN);";
+					+ "(userid, name, email, address,userType,password)"
+					+ " VALUES (?, ?, ?, ?, ADMIN,?)";
 
-	
-	private static final String deleteAdministratorStatement = 	
+	private static final String deleteAdministratorStatement =  
 			"DELETE " +
-			" FROM mobilephone " +
-			" WHERE id  = ? AND AND userType=ADMIN";
+					" FROM users " +
+					" WHERE id  = ? AND userType=ADMIN";
 	private final static String findAdministratorByIdStatement =
-			"SELECT * from users WHERE userid = ? AND userType=ADMIN";
-	
-	private final static String findAdministratorByEmailStatement =
-			"SELECT * from users WHERE email = ? AND userType=ADMIN";
-	
-	private final static String findAdminByName =
-			"SELECT * from users WHERE userid = ? userType=ADMIN";
+			"SELECT * from users WHERE userid = ? AND userType = 'ADMIN'";
 
-	
+	private final static String findAdministratorByEmailStatement =
+			"SELECT * from users WHERE email = ? AND userType = 'ADMIN'";
+
+	private final static String findAdministratorByName =
+			"SELECT * from users WHERE username = ? AND userType = 'ADMIN'";
+
+
 	@Override
 	public boolean insert(DomainObject obj) {
 		Administrator admin = (Administrator) obj;
@@ -45,7 +44,9 @@ public class AdministratorMapper extends DataMapper {
 			findStatement.setString(2, admin.getAdministratorName());
 			findStatement.setString(3, admin.getAdministratorEmail());
 			findStatement.setString(4, admin.getAdministratorAddress());
-			
+			findStatement.setString(5, admin.getAdministratorUserType());
+			findStatement.setString(6, admin.getAdministratorPassword());
+
 			result = findStatement.executeUpdate();
 			DBConnection.closePreparedStatement(findStatement);
 			DBConnection.closeConnection(dbConnection);
@@ -56,19 +57,19 @@ public class AdministratorMapper extends DataMapper {
 			return false;
 		else 
 			return true;
-	
+
 	}
-	
+
 	@Override
 	public boolean delete(DomainObject obj) {
-		
+
 		Administrator admin = (Administrator)obj;
 		int result = 0;
 		try {
 			Connection dbConnection = DBConnection.getDBConnection();
 			PreparedStatement findStatement = DBConnection.prepare(deleteAdministratorStatement, dbConnection);
 			findStatement.setInt(1, admin.getAdministratorId());
-			
+
 			result = findStatement.executeUpdate();
 			DBConnection.closePreparedStatement(findStatement);
 			DBConnection.closeConnection(dbConnection);
@@ -81,13 +82,13 @@ public class AdministratorMapper extends DataMapper {
 		else 
 			return true;
 
-		
+
 	}
-	
-	
+
+
 	@Override
 	public boolean update (DomainObject obj) {
-		
+
 		Administrator admin = (Administrator)obj;
 		int result = 0;
 		try {
@@ -97,7 +98,8 @@ public class AdministratorMapper extends DataMapper {
 			findStatement.setString(2, admin.getAdministratorName());
 			findStatement.setString(3, admin.getAdministratorEmail());
 			findStatement.setString(4, admin.getAdministratorAddress());
-			
+			findStatement.setString(5, admin.getAdministratorPassword());
+
 			result = findStatement.executeUpdate();
 			DBConnection.closePreparedStatement(findStatement);
 			DBConnection.closeConnection(dbConnection);
@@ -108,10 +110,10 @@ public class AdministratorMapper extends DataMapper {
 			return false;
 		else 
 			return true;
-	
-		
+
+
 	}
-	
+
 	public List<Administrator> findAdminById(Administrator admin){
 		List<Administrator> result = new ArrayList<Administrator>();
 		try {
@@ -119,7 +121,7 @@ public class AdministratorMapper extends DataMapper {
 			PreparedStatement findStatement = DBConnection.prepare(findAdministratorByIdStatement, dbConnection);
 			findStatement.setInt(1, admin.getUserId());
 			ResultSet resultSet = findStatement.executeQuery();
-			
+
 			while(resultSet.next()) {
 				Administrator a = new Administrator();
 				IdentityMap<Administrator> identityMap = IdentityMap.getInstance(a);
@@ -127,7 +129,9 @@ public class AdministratorMapper extends DataMapper {
 				a.setAdministratorName(resultSet.getString(2));
 				a.setAdministratorEmail(resultSet.getString(3));
 				a.setAdministratorAddress(resultSet.getString(4));
-				
+				a.setAdministratorUserType(resultSet.getString(5));
+				a.setAdministratorPassword(resultSet.getString(6));
+
 				identityMap.put(a.getAdministratorId(), a);
 				result.add(a);
 			}
@@ -136,7 +140,7 @@ public class AdministratorMapper extends DataMapper {
 		}
 		return result;
 	}
-	
+
 	public List<Administrator> findAdminByEmail(Administrator customer){
 		List<Administrator> result = new ArrayList<Administrator>();
 		try {
@@ -144,7 +148,7 @@ public class AdministratorMapper extends DataMapper {
 			PreparedStatement findStatement = DBConnection.prepare(findAdministratorByEmailStatement, dbConnection);
 			findStatement.setString(1, customer.getEmail());
 			ResultSet resultSet = findStatement.executeQuery();
-			
+
 			while(resultSet.next()) {
 				Administrator a = new Administrator();
 				IdentityMap<Administrator> identityMap = IdentityMap.getInstance(a);
@@ -152,7 +156,9 @@ public class AdministratorMapper extends DataMapper {
 				a.setAdministratorName(resultSet.getString(2));
 				a.setAdministratorEmail(resultSet.getString(3));
 				a.setAdministratorAddress(resultSet.getString(4));
-				
+				a.setAdministratorUserType(resultSet.getString(5));
+				a.setAdministratorPassword(resultSet.getString(6));
+
 				identityMap.put(a.getAdministratorId(), a);
 				result.add(a);
 			}
@@ -161,38 +167,35 @@ public class AdministratorMapper extends DataMapper {
 		}
 		return result;
 	}
-	
-	
-public static Administrator getAdminByName(String username) {
-		
+
+
+	public static Administrator getAdminByName(String username) {
+
 		Administrator admin = null;
-		
+
 		try {
 			Connection dbConnection = DBConnection.getDBConnection();
-			PreparedStatement findStatement = DBConnection.prepare(findAdminByName, dbConnection);
+			PreparedStatement findStatement = DBConnection.prepare(findAdministratorByName, dbConnection);
 			findStatement.setString(1, username);
 			ResultSet result = findStatement.executeQuery();
-			
-	
-			 admin= new Administrator();
-			admin.setUserId(result.getInt(1));
-			admin.setName(result.getString(2));
-			admin.setEmail(result.getString(3));
-			admin.setAddress(result.getString(4));
-			admin.setUserType(result.getString(5));  // need to update database for the consistence
-			admin.setPassword(result.getString(6));
-			
-			
+			while(result.next()) {
+				admin= new Administrator();
+				admin.setUserId(result.getInt(1));
+				admin.setName(result.getString(2));
+				admin.setEmail(result.getString(3));
+				admin.setAddress(result.getString(4));
+				admin.setUserType(result.getString(5));  // need to update database for the consistence
+				admin.setPassword(result.getString(6));
+			}
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		
+
 
 		return admin;
 	}
 
 
-	
+
 }
-
-
