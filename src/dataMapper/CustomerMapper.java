@@ -22,16 +22,16 @@ public class CustomerMapper extends DataMapper {
 
 	private static final String deleteCustomereStatement =  
 			"DELETE " +
-					" FROM mobilephone " +
+					" FROM users " +
 					" WHERE id  = ? AND userType=CUSTOMER";
 	private final static String findCustomerByIdStatement =
-			"SELECT * from users WHERE userid = ? AND userType=CUSTOMER";
+			"SELECT * from users WHERE userid = ? AND userType='CUSTOMER'";
 
 	private final static String findCustomerByEmailStatement =
-			"SELECT * from users WHERE email = ? AND userType=CUSTOMER";
+			"SELECT * from users WHERE email = ? AND userType='CUSTOMER'";
 
 	private final static String findCustomerByName =
-			"SELECT * from users WHERE userid = ? AND userType = 'CUSTOMER'";
+			"SELECT * from users WHERE username = ? AND userType = 'CUSTOMER'";
 
 	@Override
 	public boolean insert(DomainObject obj) {

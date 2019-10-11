@@ -54,7 +54,6 @@ public class LoginServlet extends HttpServlet {
 		System.out.println("Hello from Post method in LoginServlet");
 		String username = request.getParameter("userName");
 		String password = request.getParameter("passWord");
-		String logout = request.getParameter("logout");
 		
 		UsernamePasswordToken token = new UsernamePasswordToken(username, password);
 		token.setRememberMe(true);

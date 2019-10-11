@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
+<%@ page import="security.AppSession"%>
 <%@ page import="domain.MobilePhone"%>
 <!DOCTYPE html>
 <html>
@@ -38,12 +39,32 @@
 			<li class="nav-item active"><a class="nav-link"
 				href="HomePageServlet">Home <span class="sr-only">(current)</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="ViewMobilePhonesServlet">All
-					Mobile Phones</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="ViewMobilePhonesServlet">All Mobile Phones</a></li>
 		</ul>
+
 		<div class="nav-item  my-2 my-lg-0">
+			<%
+				if (!AppSession.isAuthenticated()) {
+			%>
 			<a class="nav-link" href="LoginServlet">Hello! Please Login</a>
 		</div>
+		<%
+			} else {
+		%>
+			<form action="LogoutControllerServlet" method="post">
+				<div class="form-group" style="margin-bottom: -25px">
+					<label for="exampleInputPassword1"></label> <input type="hidden"
+						class="form-control" style="text-align: center;" name="logout"
+						value="logout">
+				</div>
+				<button type="submit" class="btn btn-primary">Logout</button>
+			</form>
+		</div>
+
+		<%
+			}
+		%>
 	</div>
 </nav>
 <body>
@@ -55,9 +76,7 @@
 				<!-- Featured image -->
 				<div class="view overlay rounded z-depth-2 mb-4">
 					<img class="img-fluid"
-						<% 						
-							out.println("src=\"Resources/mp-" + m1.getMobilePhoneId()+".jpg\"");
-						%>
+						<%out.println("src=\"Resources/mp-" + m1.getMobilePhoneId() + ".jpg\"");%>
 						alt="Sample image"> <a>
 						<div class="mask rgba-white-slight"></div>
 					</a>
@@ -85,7 +104,14 @@
 					out.println("<p class=\"dark-grey-text\">" + m1.getDescription() + "</p");
 				%>
 				<!-- Read more button -->
-				<a class="btn btn-info btn-rounded btn-md">Buy now</a>
+				<form action="MobilePhoneDetailControllerServlet" method="post">
+					<div class="form-group" style="margin-bottom: -20px">
+						<label for="m1"></label> <input type="hidden" class="form-control"
+							style="text-align: center;" name="mobileDetail"
+							value=<%out.println(m1.getMobilePhoneId());%>>
+					</div>
+					<button type="submit" class="btn btn-primary">Check More</button>
+				</form>
 			</div>
 			<!-- Grid column -->
 			<!-- Grid column -->
@@ -93,9 +119,7 @@
 				<!-- Featured image -->
 				<div class="view overlay rounded z-depth-2 mb-4">
 					<img class="img-fluid"
-						<% 						
-							out.println("src=\"Resources/mp-" + m2.getMobilePhoneId()+".jpg\"");
-						%>
+						<%out.println("src=\"Resources/mp-" + m2.getMobilePhoneId() + ".jpg\"");%>
 						alt="Sample image"> <a>
 						<div class="mask rgba-white-slight"></div>
 					</a>
@@ -123,7 +147,14 @@
 					out.println("<p class=\"dark-grey-text\">" + m2.getDescription() + "</p");
 				%>
 				<!-- Read more button -->
-				<a class="btn btn-info btn-rounded btn-md">Buy now</a>
+				<form action="MobilePhoneDetailControllerServlet" method="post">
+					<div class="form-group" style="margin-bottom: -20px">
+						<label for="m1"></label> <input type="hidden" class="form-control"
+							style="text-align: center;" name="mobileDetail"
+							value=<%out.println(m2.getMobilePhoneId());%>>
+					</div>
+					<button type="submit" class="btn btn-primary">Check More</button>
+				</form>
 			</div>
 			<!-- Grid column -->
 			<!-- Grid column -->
@@ -131,9 +162,7 @@
 				<!-- Featured image -->
 				<div class="view overlay rounded z-depth-2 mb-4">
 					<img class="img-fluid"
-						<% 						
-							out.println("src=\"Resources/mp-" + m3.getMobilePhoneId()+".jpg\"");
-						%>
+						<%out.println("src=\"Resources/mp-" + m3.getMobilePhoneId() + ".jpg\"");%>
 						alt="Sample image"> <a>
 						<div class="mask rgba-white-slight"></div>
 					</a>
@@ -161,7 +190,14 @@
 					out.println("<p class=\"dark-grey-text\">" + m3.getDescription() + "</p");
 				%>
 				<!-- Read more button -->
-				<a class="btn btn-info btn-rounded btn-md">Buy now</a>
+				<form action="MobilePhoneDetailControllerServlet" method="post">
+					<div class="form-group" style="margin-bottom: -20px">
+						<label for="m1"></label> <input type="hidden" class="form-control"
+							style="text-align: center;" name="mobileDetail"
+							value=<%out.println(m3.getMobilePhoneId());%>>
+					</div>
+					<button type="submit" class="btn btn-primary">Check More</button>
+				</form>
 			</div>
 			<!-- Grid column -->
 		</div>

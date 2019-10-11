@@ -34,10 +34,15 @@
 					Customer Accounts</a></li>
 		</ul>
 		<div class="nav-item  my-2 my-lg-0">
-			<a class="nav-link" href="HomePageServlet">Logout</a>
+			<form action="LogoutControllerServlet" method="post">
+				<div class="form-group" style="margin-bottom: -25px">
+					<label for="exampleInputPassword1"></label> <input type="hidden"
+						class="form-control" style="text-align: center;" name="logout"
+						value="logout">
+				</div>
+				<button type="submit" class="btn btn-primary">Logout</button>
+			</form>
 		</div>
-
-
 	</div>
 </nav>
 <body>

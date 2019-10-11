@@ -48,7 +48,7 @@ public class LogoutControllerServlet extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		System.out.println("Hello from Post method in LogoutControllerServlet");
 		Subject currentUser = SecurityUtils.getSubject();	
-		String view = "/LoginPage.jsp";
+		String view = "/HomePageServlet";
 		currentUser.logout();
 		ServletContext servletContext = getServletContext();
 		RequestDispatcher requestDispatcher = servletContext.getRequestDispatcher(view);

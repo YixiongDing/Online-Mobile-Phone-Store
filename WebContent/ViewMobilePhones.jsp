@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.*"%>
+<%@ page import="security.AppSession"%>
 <%@ page import="domain.MobilePhone"%>
 
 <!DOCTYPE html>
@@ -61,31 +62,57 @@
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item"><a class="nav-link" href="HomePageServlet">Home</a></li>
 			<li class="nav-item active"><a class="nav-link"
-				href="ViewMobilePhones">All Mobile Phones<span class="sr-only">(current)</span>
+				href="ViewMobilePhonesServlet">All Mobile Phones<span
+					class="sr-only">(current)</span>
 			</a></li>
 		</ul>
 		<div class="nav-item  my-2 my-lg-0">
+			<%
+				if (!AppSession.isAuthenticated()) {
+			%>
 			<a class="nav-link" href="LoginServlet">Hello! Please Login</a>
 		</div>
+		<%
+			} else {
+		%>
+			<form action="LogoutControllerServlet" method="post">
+				<div class="form-group" style="margin-bottom: -25px">
+					<label for="exampleInputPassword1"></label> <input type="hidden"
+						class="form-control" style="text-align: center;" name="logout"
+						value="logout">
+				</div>
+				<button type="submit" class="btn btn-primary">Logout</button>
+			</form>
+		</div>
+
+		<%
+			}
+		%>
 	</div>
 </nav>
 <body>
 	<section class="text-center my-5">
 		<div class="row">
 			<%
-						List<MobilePhone> mobiless = (ArrayList<MobilePhone>) request.getAttribute("mobiles");
+				List<MobilePhone> mobiless = (ArrayList<MobilePhone>) request.getAttribute("mobiles");
 
-						for (MobilePhone mobile : mobiless) {
-							out.println("<div class=\"column\">");
-							out.println("<div class=\"card\"\">");
-							out.println("<img src=\"Resources/mp-" + mobile.getMobilePhoneId()+".jpg\" class=\"card-img-top\" alt=\"no image for this mobile phone\">");
-							out.println("<div class=\"card-body\">");
-							out.println("<h5 class=\"card-title\">"+mobile.getModelName()+"</h5>");
-							out.println("<p class=\"card-text\">"+mobile.getDescription()+"</p>");
-							out.println("<a href=\"#\" class=\"btn btn-primary\">View Detail</a>");
-							out.println("</div></div></div>");
-						}
-					%>
+				for (MobilePhone mobile : mobiless) {
+					out.println("<div class=\"column\">");
+					out.println("<div class=\"card\"\">");
+					out.println("<img src=\"Resources/mp-" + mobile.getMobilePhoneId()
+							+ ".jpg\" class=\"card-img-top mt-4\" alt=\"no image for this mobile phone\">");
+					out.println("<div class=\"card-body\">");
+					out.println("<h5 class=\"card-title\">" + mobile.getModelName() + "</h5>");
+					out.println("<p class=\"card-text\">" + mobile.getDescription() + "</p>");
+					out.println(
+							"<form action=\"MobilePhoneDetailControllerServlet\" method=\"post\"<div style=\"margin-bottom: -40px\">");
+					out.println("<label for=\"v\"></label> <input type=\"hidden\"");
+					out.println("name=\"mobileDetail\"value=\"" + mobile.getMobilePhoneId() + "\"></div>");
+					out.println(
+							"<button type=\"submit\" class=\"btn btn-primary w-50 mx-auto mb-4\">View Detail</button></form>");
+					out.println("</div></div>");
+				}
+			%>
 		</div>
 	</section>
 </body>
