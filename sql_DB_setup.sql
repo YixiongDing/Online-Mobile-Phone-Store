@@ -24,7 +24,7 @@ INSERT INTO MobilePhone VALUES (1006, 'Mi MIX 3 5G', '128 GB', 'Onyx Black','Xia
 
 CREATE TABLE Users(
    userId INT,
-   name VARCHAR(50),
+   username VARCHAR(50),
    email VARCHAR(100),
    address VARCHAR(100),
    userType VARCHAR(50),
@@ -32,8 +32,9 @@ CREATE TABLE Users(
    PRIMARY KEY(UserId)
    );
  
-INSERT INTO Users VALUES (2001, 'Albert Einstein', 'albert.einstein@ias.edu', 'Office 9, IAS, Princeton, USA','ADMIN');
-INSERT INTO Users VALUES (2002, 'James Bond', 'jbond@ghcq.uk', 'Queen Street 9,Chelsea 338, London','CUSTOMER');
+INSERT INTO Users VALUES (2001, 'Albert Einstein', 'albert.einstein@ias.edu', 'Office 9, IAS, Princeton, USA','CUSTOMER',111);
+INSERT INTO Users VALUES (2002, 'James Bond', 'jbond@ghcq.uk', 'Queen Street 9,Chelsea 338, London','CUSTOMER',222);
+INSERT INTO Users VALUES (2003, 'admin', 'nimda@admin', 'nimda','ADMIN',123);
 
 
 CREATE TABLE Orders(
@@ -56,3 +57,12 @@ CREATE TABLE MobilePhone_Order(
    FOREIGN KEY (orderId) REFERENCES Orders (orderId)
    );
  
+   
+CREATE TABLE Locks(
+   Id INT,
+   SessionId INT,
+   tablename VARCHAR(10),
+   PRIMARY KEY(Id)
+   );
+   
+ INSERT INTO Locks VALUES (4001, 2001, 'Orders');
