@@ -8,14 +8,11 @@ public class InterceptingValidator {
 		
 	}
 	
-
+	//detect SQL injection
 	private static boolean checkSQLInjection(String uri) {
 		String query = uri.toLowerCase();
-		//detect SQL injection
-		if (query.matches(
-				"/\\w*((\\%27)|(\\'))((\\%6F)|o|(\\%4F))((\\%72)|r|(\\%52))/ix")
-				|| query.matches("/((\\%27)|(\\'))union/ix")){
-			System.out.println("error");
+		if (query.matches("/[\\t\\r\\n]|(--[^\\r\\n]*)|(\\/\\*[\\w\\W]*?(?=\\*)\\*\\/)/gi")){
+			System.out.println("Error");
 			return false;
 		}
 		return true;

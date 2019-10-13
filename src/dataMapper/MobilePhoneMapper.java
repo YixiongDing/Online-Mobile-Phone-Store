@@ -66,6 +66,7 @@ public class MobilePhoneMapper extends DataMapper{
 				result.add(m);
 			}
 
+			dbConnection.close();
 		} catch (SQLException e) {
 		}
 		return result;
@@ -92,6 +93,7 @@ public class MobilePhoneMapper extends DataMapper{
 				identityMap.put(m.getMobilePhoneId(),m);
 				result.add(m);;
 			}
+			dbConnection.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -118,7 +120,7 @@ public class MobilePhoneMapper extends DataMapper{
 				identityMap.put(m.getMobilePhoneId(),m);
 				result.add(m);;
 			}
-
+			dbConnection.close();
 		} catch (SQLException e) {
 
 		}

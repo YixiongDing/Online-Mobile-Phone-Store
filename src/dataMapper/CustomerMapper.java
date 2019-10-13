@@ -130,6 +130,8 @@ public class CustomerMapper extends DataMapper {
 				identityMap.put(c.getCustomerId(), c);
 				result.add(c);
 			}
+			DBConnection.closePreparedStatement(findStatement);
+			DBConnection.closeConnection(dbConnection);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -156,6 +158,8 @@ public class CustomerMapper extends DataMapper {
 				identityMap.put(c.getUserId(), c);
 				result.add(c);
 			}
+			DBConnection.closePreparedStatement(findStatement);
+			DBConnection.closeConnection(dbConnection);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -181,6 +185,8 @@ public class CustomerMapper extends DataMapper {
 				identityMap.put(u.getUserId(),u);
 				result.add(u);
 			}
+			DBConnection.closePreparedStatement(findStatement);
+			DBConnection.closeConnection(dbConnection);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -203,7 +209,8 @@ public class CustomerMapper extends DataMapper {
 				customer.setUserType(result.getString(5));  // need to update database for the consistency
 				customer.setPassword(result.getString(6));
 			}
-
+			DBConnection.closePreparedStatement(findStatement);
+			DBConnection.closeConnection(dbConnection);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -228,7 +235,8 @@ public class CustomerMapper extends DataMapper {
 				customer.setUserType(result.getString(5));  // need to update database for the consistence
 				customer.setPassword(result.getString(6));
 			}
-
+			DBConnection.closePreparedStatement(findStatement);
+			DBConnection.closeConnection(dbConnection);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

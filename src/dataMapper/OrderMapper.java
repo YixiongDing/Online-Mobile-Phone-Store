@@ -141,6 +141,7 @@ public class OrderMapper extends DataMapper {
 				
 				result.add(odr);
 			}
+			dbConnection.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -182,6 +183,7 @@ public class OrderMapper extends DataMapper {
 				
 				result.add(odr);
 			}
+			dbConnection.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -217,6 +219,7 @@ public class OrderMapper extends DataMapper {
 				identityMap.put(odr.getOrderId(), odr);
 				result.add(odr);
 			}
+			dbConnection.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

@@ -48,7 +48,7 @@ CREATE TABLE Orders(
    FOREIGN KEY (userId) REFERENCES Users (UserId)
    );
  
-INSERT INTO Orders VALUES (3001, '2019-01-01', 'ACTIVE', 1001,2001);
+INSERT INTO Orders VALUES (3001, '2019-01-01', 'PROCESSING', 1001,2001);
 
 CREATE TABLE MobilePhone_Order(
    mobilePhoneId INT,

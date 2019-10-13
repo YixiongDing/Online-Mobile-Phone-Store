@@ -46,7 +46,6 @@ public class AdministratorMapper extends DataMapper {
 			findStatement.setString(4, admin.getAdministratorAddress());
 			findStatement.setString(5, admin.getAdministratorUserType());
 			findStatement.setString(6, admin.getAdministratorPassword());
-
 			result = findStatement.executeUpdate();
 			DBConnection.closePreparedStatement(findStatement);
 			DBConnection.closeConnection(dbConnection);
@@ -82,12 +81,11 @@ public class AdministratorMapper extends DataMapper {
 		else 
 			return true;
 
-
 	}
 
 
 	@Override
-	public boolean update (DomainObject obj) {
+	public boolean update(DomainObject obj) {
 
 		Administrator admin = (Administrator)obj;
 		int result = 0;
@@ -99,7 +97,6 @@ public class AdministratorMapper extends DataMapper {
 			findStatement.setString(3, admin.getAdministratorEmail());
 			findStatement.setString(4, admin.getAdministratorAddress());
 			findStatement.setString(5, admin.getAdministratorPassword());
-
 			result = findStatement.executeUpdate();
 			DBConnection.closePreparedStatement(findStatement);
 			DBConnection.closeConnection(dbConnection);
@@ -110,8 +107,6 @@ public class AdministratorMapper extends DataMapper {
 			return false;
 		else 
 			return true;
-
-
 	}
 
 	public List<Administrator> findAdminById(Administrator admin){
@@ -131,10 +126,11 @@ public class AdministratorMapper extends DataMapper {
 				a.setAdministratorAddress(resultSet.getString(4));
 				a.setAdministratorUserType(resultSet.getString(5));
 				a.setAdministratorPassword(resultSet.getString(6));
-
 				identityMap.put(a.getAdministratorId(), a);
 				result.add(a);
 			}
+			DBConnection.closePreparedStatement(findStatement);
+			DBConnection.closeConnection(dbConnection);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -162,6 +158,8 @@ public class AdministratorMapper extends DataMapper {
 				identityMap.put(a.getAdministratorId(), a);
 				result.add(a);
 			}
+			DBConnection.closePreparedStatement(findStatement);
+			DBConnection.closeConnection(dbConnection);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -187,7 +185,8 @@ public class AdministratorMapper extends DataMapper {
 				admin.setUserType(result.getString(5));  // need to update database for the consistence
 				admin.setPassword(result.getString(6));
 			}
-
+			DBConnection.closePreparedStatement(findStatement);
+			DBConnection.closeConnection(dbConnection);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -212,7 +211,8 @@ public class AdministratorMapper extends DataMapper {
 				admin.setUserType(result.getString(5));  // need to update database for the consistence
 				admin.setPassword(result.getString(6));
 			}
-
+			DBConnection.closePreparedStatement(findStatement);
+			DBConnection.closeConnection(dbConnection);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
