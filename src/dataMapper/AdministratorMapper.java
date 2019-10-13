@@ -191,8 +191,31 @@ public class AdministratorMapper extends DataMapper {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+		return admin;
+	}
+	
+	public static Administrator getAdminById(int id) {
 
+		Administrator admin = null;
 
+		try {
+			Connection dbConnection = DBConnection.getDBConnection();
+			PreparedStatement findStatement = DBConnection.prepare(findAdministratorByIdStatement, dbConnection);
+			findStatement.setInt(1, id);
+			ResultSet result = findStatement.executeQuery();
+			while(result.next()) {
+				admin= new Administrator();
+				admin.setUserId(result.getInt(1));
+				admin.setName(result.getString(2));
+				admin.setEmail(result.getString(3));
+				admin.setAddress(result.getString(4));
+				admin.setUserType(result.getString(5));  // need to update database for the consistence
+				admin.setPassword(result.getString(6));
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		return admin;
 	}
 

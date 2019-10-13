@@ -29,9 +29,9 @@
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active"><a class="nav-link"
-				href="HomePageServlet">Home <span class="sr-only">(current)</span>
+				href="HomePageControllerServlet">Home <span class="sr-only">(current)</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="ViewMobilePhonesServlet">All
+			<li class="nav-item"><a class="nav-link" href="ViewMobilePhonesControllerServlet">All
 					Mobile Phones</a></li>
 		</ul>
 	</div>
@@ -42,7 +42,7 @@
 			<h1 class="h1-responsive font-weight-bold text-center my-5">
 				Oops, looks like your username/password is not correct</h1>
 		</div>
-		<form action="LoginServlet" method="get">
+		<form action="LoginControllerServlet" method="get">
 			<button type="submit" name="button" value="submit"
 				class="btn btn-primary">Try Again</button>
 		</form>

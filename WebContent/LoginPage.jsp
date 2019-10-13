@@ -26,9 +26,9 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item"><a class="nav-link" href="HomePageServlet">Home</a></li>
+			<li class="nav-item"><a class="nav-link" href="HomePageControllerServlet">Home</a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="ViewMobilePhonesServlet">All Mobile Phones</a></li>
+				href="ViewMobilePhonesControllerServlet">All Mobile Phones</a></li>
 			<li class="nav-item active"><a class="nav-link" href="#">Login<span
 					class="sr-only">(current)</span>
 			</a></li>
@@ -40,7 +40,7 @@
 		<%
 			if (!AppSession.isAuthenticated()) {
 		%>
-		<form action="LoginServlet" method="post"
+		<form action="LoginControllerServlet" method="post"
 			style="margin-left: auto; margin-right: auto; margin-top: 100px; width: 20%;">
 			<div class="form-group">
 				<label for="exampleInputName">Username</label> <input type="name"
@@ -54,6 +54,8 @@
 					placeholder="Enter Password">
 			</div>
 			<button type="submit" class="btn btn-primary">Login</button>
+			<a class="btn btn-primary" href="RegisterControllerServlet"
+				role="button">Register</a>
 		</form>
 		<%
 			} else {

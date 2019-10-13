@@ -36,16 +36,12 @@ public class AppRealm extends JdbcRealm {
 			return null;
 			
 		}
-		
-		String username =(String) principals.getPrimaryPrincipal();
-		final User user = User.getUser(username);
+
+		final User user = User.getUserById((int)principals.getPrimaryPrincipal());
 		
 		if(user == null) {
-			
-			System.out.println("No account found for user with username " + username);
+			System.out.println("No account found for user with user id " + (int)principals.getPrimaryPrincipal());
 			return null;
-			
-			
 		}
 		
 		if (user instanceof Administrator) {
@@ -57,10 +53,7 @@ public class AppRealm extends JdbcRealm {
 			roles.add(AppSession.CUSTOMER_ROLE);
 		}
 		
-		
-		return new SimpleAuthorizationInfo(roles);
-		
-		
+		return new SimpleAuthorizationInfo(roles);	
 		
 	}
 }

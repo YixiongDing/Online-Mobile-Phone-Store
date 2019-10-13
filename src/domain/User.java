@@ -90,7 +90,6 @@ public class User extends DomainObject {
 		Administrator admin = AdministratorMapper.getAdminByName(username);
 		Customer customer = CustomerMapper.getCustomerByName(username);
 		
-		
 		if( admin != null) {
 			
 			return admin;
@@ -100,9 +99,19 @@ public class User extends DomainObject {
 		}
 		
 		return null;
-		
-		
 	}
+	
 
+	public static User getUserById(int id) {
+		Administrator admin = AdministratorMapper.getAdminById(id);
+		Customer customer = CustomerMapper.getCustomerById(id);
+		if( admin != null) {			
+			return admin;
+		}else if(customer != null) {
+			
+			return customer;
+		}
+		return null;
+	}
 	
 }

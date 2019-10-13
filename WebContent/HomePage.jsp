@@ -37,17 +37,29 @@
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
 			<li class="nav-item active"><a class="nav-link"
-				href="HomePageServlet">Home <span class="sr-only">(current)</span>
+				href="HomePageControllerServlet">Home <span class="sr-only">(current)</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="ViewMobilePhonesServlet">All Mobile Phones</a></li>
+				href="ViewMobilePhonesControllerServlet">All Mobile Phones</a></li>
+				
 		</ul>
+		
+		<div class="nav-item  my-2 my-lg-0">
+			<%
+				if (AppSession.isAuthenticated()) {
+					
+			%>
+					<a class="nav-link" href="DashboardControllerServlet">Dashboard</a>
+			<%
+				} 
+			%>
+		</div>		
 
 		<div class="nav-item  my-2 my-lg-0">
 			<%
 				if (!AppSession.isAuthenticated()) {
 			%>
-			<a class="nav-link" href="LoginServlet">Hello! Please Login</a>
+			<a class="nav-link" href="LoginControllerServlet">Hello! Please Login</a>
 		</div>
 		<%
 			} else {

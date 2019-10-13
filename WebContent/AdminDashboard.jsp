@@ -27,9 +27,9 @@
 					<span class="sr-only">(current)</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="ManageMobilePhoneServlet">Manage Mobile Phones</a></li>
+				href="ManageMobilePhoneControllerServlet">Manage Mobile Phones</a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="ManageOrderServlet">Manage Orders</a></li>
+				href="ManageOrderControllerServlet">Manage Orders</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Manage
 					Customer Accounts</a></li>
 		</ul>
@@ -74,7 +74,7 @@
 
 				<!-- Read more button -->
 				<a class="btn btn-info btn-rounded btn-md"
-					href="ManageMobilePhoneServlet"> Manage </a>
+					href="ManageMobilePhoneControllerServlet"> Manage </a>
 			</div>
 			<!-- Grid column -->
 			<!-- Grid column -->
@@ -101,7 +101,7 @@
 				<!-- Excerpt -->
 
 				<!-- Read more button -->
-				<a class="btn btn-info btn-rounded btn-md" href="ManageOrderServlet">
+				<a class="btn btn-info btn-rounded btn-md" href="ManageOrderControllerServlet">
 					Manage </a>
 			</div>
 			<!-- Grid column -->

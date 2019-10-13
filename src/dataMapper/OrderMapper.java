@@ -9,6 +9,8 @@ import domain.Customer;
 import domain.DomainObject;
 import domain.MobilePhone;
 import domain.Order;
+import service.CustomerService;
+import service.MobilePhoneService;
 
 public class OrderMapper extends DataMapper {
 	
@@ -33,7 +35,7 @@ public class OrderMapper extends DataMapper {
 	
 	private static final String findAllOrderStatement =
 			"SELECT * " + 
-					" FROM orders ";
+					" FROM Orders ";
 	
 	@Override
 	public boolean insert(DomainObject obj) {
@@ -71,10 +73,7 @@ public class OrderMapper extends DataMapper {
 			findStatement.setString(2, order.getStatus());
 			findStatement.setInt(3, order.getMobilePhone().getMobilePhoneId());
 			findStatement.setInt(4, order.getCustomer().getUserId());
-
-			
 			findStatement.setInt(5, order.getOrderId());
-			
 			result = findStatement.executeUpdate();
 			DBConnection.closePreparedStatement(findStatement);
 			DBConnection.closeConnection(dbConnection);
@@ -95,7 +94,6 @@ public class OrderMapper extends DataMapper {
 			Connection dbConnection = DBConnection.getDBConnection();
 			PreparedStatement findStatement = DBConnection.prepare(deleteOrderStatement, dbConnection);
 			findStatement.setInt(1, order.getOrderId());
-			
 			result = findStatement.executeUpdate();
 			DBConnection.closePreparedStatement(findStatement);
 			DBConnection.closeConnection(dbConnection);
@@ -138,7 +136,6 @@ public class OrderMapper extends DataMapper {
 				CustomerMapper cm = new CustomerMapper();
 				odr.setCustomer(cm.findCustomerById(customer).get(0));
 				
-
 				//put order into identity map
 				identityMap.put(odr.getOrderId(), odr);
 				
@@ -151,13 +148,13 @@ public class OrderMapper extends DataMapper {
 	}
 	
 	
-	public List<Order> findOrderByCustomerId(Order order){
+	public List<Order> findOrderByCustomerId(Customer c){
 
 		List<Order> result = new ArrayList<Order>();
 		try {
 			Connection dbConnection = DBConnection.getDBConnection();
 			PreparedStatement findStatement = DBConnection.prepare(findOrderByCustomerIdStatement, dbConnection);
-			findStatement.setInt(1, order.getCustomer().getUserId());
+			findStatement.setInt(1, c.getUserId());
 			ResultSet resultSet = findStatement.executeQuery();
 			
 			while(resultSet.next()) {
@@ -180,7 +177,6 @@ public class OrderMapper extends DataMapper {
 				CustomerMapper cm = new CustomerMapper();
 				odr.setCustomer(cm.findCustomerById(customer).get(0));
 	
-				
 				//put order into identity map
 				identityMap.put(odr.getOrderId(), odr);
 				
@@ -194,26 +190,30 @@ public class OrderMapper extends DataMapper {
 	
 	public List<Order> findAllOrder(){
 		List<Order> result = new ArrayList<Order>();
+		List<MobilePhone> mobileResult = new ArrayList<MobilePhone>();
+		List<Customer> customerResult = new ArrayList<Customer>();
+		MobilePhoneService ms= new MobilePhoneService();
+		CustomerService cs = new CustomerService();
+		
 		try {
 			Connection dbConnection = DBConnection.getDBConnection();
 			PreparedStatement findStatement = DBConnection.prepare(findAllOrderStatement, dbConnection);
 			ResultSet rs = findStatement.executeQuery();
-
+			
 			while(rs.next()) {
 				Order odr = new Order();
 				IdentityMap<Order> identityMap = IdentityMap.getInstance(odr);
 				odr.setOrderId(rs.getInt(1));
 				odr.setCreateTime(rs.getTimestamp(2));
 				odr.setStatus(rs.getString(3));
-
 				MobilePhone mobilePhone = new MobilePhone();
 				mobilePhone.setMobilePhoneId(rs.getInt(4));
-				MobilePhoneMapper mobilePhoneMapper = new MobilePhoneMapper();
-				odr.setMobilePhone(mobilePhoneMapper.findMobilePhone(mobilePhone).get(0));
+				mobileResult = ms.getMobilePhone(mobilePhone);				
+				odr.setMobilePhone(mobileResult.get(0));
 				Customer customer = new Customer();
 				customer.setCustomerId(rs.getInt(5));
-				CustomerMapper cm = new CustomerMapper();
-				odr.setCustomer(cm.findCustomerById(customer).get(0));				
+				customerResult = cs.findCustomer(customer);
+				odr.setCustomer(customerResult.get(0));	
 				identityMap.put(odr.getOrderId(), odr);
 				result.add(odr);
 			}

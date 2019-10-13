@@ -6,7 +6,7 @@ import java.util.List;
 import dataMapper.CustomerMapper;
 import dataMapper.IdentityMap;
 import dataMapper.UnitOfWork;
-import domain.Customer;
+import domain.*;
 
 public class CustomerService {
 	
@@ -39,8 +39,14 @@ public class CustomerService {
 		if (customerMap != null) {
 			List<Customer> result = new ArrayList<Customer>();
 			result.add(customerMap);
+			//System.out.println("customer service result "+ result.get(0).getCustomerId());
 			return result;
 		}
+		//System.out.println("customer service 2 "+ customerMapper.findCustomerById(customer).get(0).getCustomerName());
+		return customerMapper.findCustomerById(customer);
+	}
+	
+	public List<Customer> findCustomerAfterUpdate(Customer customer){
 		return customerMapper.findCustomerById(customer);
 	}
 	
@@ -55,7 +61,12 @@ public class CustomerService {
 			return result;
 		}
 		//if not in the identity map
+
 		return customerMapper.findCustomerByEmail(customer);
+	}
+	
+	public List<User> getAllUser() {
+		return customerMapper.findAllUser();
 	}
 	
 

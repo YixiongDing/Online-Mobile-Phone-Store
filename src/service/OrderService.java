@@ -6,8 +6,7 @@ import java.util.List;
 import dataMapper.IdentityMap;
 import dataMapper.OrderMapper;
 import dataMapper.UnitOfWork;
-import domain.MobilePhone;
-import domain.Order;
+import domain.*;
 
 public class OrderService {
 
@@ -55,12 +54,16 @@ public class OrderService {
 			return orderMapper.findOrderByOrderId(order);
 		}
 		else if (order.getCustomer() != null)
-			return orderMapper.findOrderByCustomerId(order);
+			return orderMapper.findOrderByCustomerId(order.getCustomer());
 		else
 			return null;
 	}
 	
 	public List<Order> getAllOrder() {
 		return orderMapper.findAllOrder();
+	}
+	
+	public List<Order> getOrderByCustomerId(Customer customer){
+		return orderMapper.findOrderByCustomerId(customer);
 	}
 }

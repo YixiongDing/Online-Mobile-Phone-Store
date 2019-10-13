@@ -51,7 +51,7 @@
 				%>
 			</ul>
 		</div>
-		<form action="DeleteMobilePhoneServlet" method="post">
+		<form action="DeleteMobilePhoneControllerServlet" method="post">
 			<button type="submit" name="delete"
 				<%out.println("value=" + mobile.getMobilePhoneId());%>
 				class="btn btn-primary">Delete</button>

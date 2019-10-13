@@ -26,18 +26,26 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item"><a class="nav-link" href="LoginSuccess.jsp">Dashboard</a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="ManageMobilePhoneServlet">Manage Mobile Phones</a></li>
+				href="AdminDashboard.jsp">Dashboard</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="ManageMobilePhoneControllerServlet">Manage Mobile Phones</a></li>
 			<li class="nav-item active"><a class="nav-link"
-				href="ManageOrderServlet">Manage Orders <span class="sr-only">(current)</span>
+				href="ManageOrderControllerServlet">Manage Orders <span class="sr-only">(current)</span>
 			</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Manage
 					Customer Accounts</a></li>
 		</ul>
 
 		<div class="nav-item  my-2 my-lg-0">
-			<a class="nav-link" href="HomePageServlet">Logout</a>
+			<form action="LogoutControllerServlet" method="post">
+				<div class="form-group" style="margin-bottom: -25px">
+					<label for="exampleInputPassword1"></label> <input type="hidden"
+						class="form-control" style="text-align: center;" name="logout"
+						value="logout">
+				</div>
+				<button type="submit" class="btn btn-primary">Logout</button>
+			</form>
 		</div>
 	</div>
 </nav>
@@ -58,7 +66,7 @@
 						List<Order> orders = (ArrayList<Order>) request.getAttribute("orders");
 
 						for (Order order : orders) {
-							out.println("<form action=\"ManageOrderServlet\" method=\"post\">");
+							out.println("<form action=\"ManageOrderControllerServlet\" method=\"post\">");
 							out.print("<tr><td>" + order.getId() + "</td><td>" + order.getCreateTime() + "</td><td>"
 									+ order.getStatus() + "</td><td>" + order.getMobilePhone().getId() + "</td><td>"
 									+ order.getCustomer().getCustomerName() + "</td>" + "<td colspan=\"2\" align=\"center\">"

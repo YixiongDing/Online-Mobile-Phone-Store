@@ -26,19 +26,27 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item"><a class="nav-link" href="LoginSuccess.jsp">Dashboard</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="AdminDashboard.jsp">Dashboard</a></li>
 			<li class="nav-item active"><a class="nav-link"
-				href="ManageMobilePhoneServlet">Manage Mobile Phones <span
+				href="ManageMobilePhoneControllerServlet">Manage Mobile Phones <span
 					class="sr-only">(current)</span>
 			</a></li>
-			<li class="nav-item"><a class="nav-link" href="ManageOrderServlet">Manage
-					Orders</a></li>
+			<li class="nav-item"><a class="nav-link"
+				href="ManageOrderControllerServlet">Manage Orders</a></li>
 			<li class="nav-item"><a class="nav-link" href="#">Manage
 					Customer Accounts</a></li>
 		</ul>
 
 		<div class="nav-item  my-2 my-lg-0">
-			<a class="nav-link" href="HomePageServlet">Logout</a>
+			<form action="LogoutControllerServlet" method="post">
+				<div class="form-group" style="margin-bottom: -25px">
+					<label for="exampleInputPassword1"></label> <input type="hidden"
+						class="form-control" style="text-align: center;" name="logout"
+						value="logout">
+				</div>
+				<button type="submit" class="btn btn-primary">Logout</button>
+			</form>
 		</div>
 	</div>
 </nav>
@@ -61,22 +69,10 @@
 						List<MobilePhone> mobiles = (ArrayList<MobilePhone>) request.getAttribute("mobiles");
 
 						for (MobilePhone mobile : mobiles) {
-							out.println("<form action=\"ManageMobilePhoneServlet\" method=\"post\">");
-							out.print("<tr><td>" 
-									+ mobile.getMobilePhoneId() 
-									+ "</td><td>" 
-									+ mobile.getModelName() 
-									+"</td><td>"
-									+ mobile.getStorageSize()
-									+"</td><td>"
-									+ mobile.getColor()
-									+ "</td><td>"
-									+ mobile.getBrand() 
-									+ "</td><td>" 
-									+ mobile.getPrice() 
-									+ "</td><td>" 
-									+ mobile.getQty() 
-									+ "</td>"
+							out.println("<form action=\"ManageMobilePhoneControllerServlet\" method=\"post\">");
+							out.print("<tr><td>" + mobile.getMobilePhoneId() + "</td><td>" + mobile.getModelName() + "</td><td>"
+									+ mobile.getStorageSize() + "</td><td>" + mobile.getColor() + "</td><td>" + mobile.getBrand()
+									+ "</td><td>" + mobile.getPrice() + "</td><td>" + mobile.getQty() + "</td>"
 									+ "<td colspan=\"2\" align=\"center\">"
 									+ "<button style=\"margin: 0px 10px 0px 10px;\" type=\"submit\" name=\"update\" value=\""
 									+ mobile.getMobilePhoneId() + "\" class=\"btn btn-primary\">Update</button>"
@@ -87,7 +83,7 @@
 					%>
 				</tbody>
 			</table>
-			<form action="AddMobilePhoneServlet" method="get">
+			<form action="AddMobilePhoneControllerServlet" method="get">
 				<button type="submit" name="insert" value="insert"
 					class="btn btn-primary">Add A New Mobile Phone</button>
 			</form>

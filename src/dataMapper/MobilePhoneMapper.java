@@ -24,24 +24,24 @@ public class MobilePhoneMapper extends DataMapper{
 	private static final String findAllMobilePhoneStatement =
 			"SELECT * " + 
 					" FROM mobilephone ";
-	
+
 	private static final String updateMobilePhoneStatement =
 			"UPDATE mobilephone "+
 					" SET modelname = ?, storagesize=?, color=?, brand = ?, price = ?, qty = ?, description = ? " +
 					" WHERE mobilephoneid  = ? ";
-	
+
 	private static final String insertMobilePhoneStatement = 
 			"INSERT INTO mobilephone " +
 					" (mobilephoneid, modelname, storagesize,color, brand, price, qty, description) "+
 					" VALUES (?, ?, ?, ?, ?, ?, ?, ?); ";
-	
+
 	private static final String deleteMobilePhoneStatement = 
-				"DELETE " +
+			"DELETE " +
 					" FROM mobilephone " +
 					" WHERE mobilephoneid  = ? ";
-	
-	
-	
+
+
+
 	public List<MobilePhone> findMobilePhone(MobilePhone mobile) {
 
 		List<MobilePhone> result = new ArrayList<MobilePhone>();
@@ -124,9 +124,6 @@ public class MobilePhoneMapper extends DataMapper{
 		}
 		return result;
 	}
-	
-
-	
 
 	@Override
 	public boolean update(DomainObject obj) {
@@ -146,7 +143,8 @@ public class MobilePhoneMapper extends DataMapper{
 			findStatement.setInt(8, mobile.getMobilePhoneId());
 			result = findStatement.executeUpdate();
 			DBConnection.closePreparedStatement(findStatement);
-			DBConnection.closeConnection(dbConnection);		} catch(Exception e) {
+			DBConnection.closeConnection(dbConnection);		
+		} catch(Exception e) {
 			e.printStackTrace();
 		}
 		if (result == 0)
@@ -154,7 +152,7 @@ public class MobilePhoneMapper extends DataMapper{
 		else 
 			return true;
 	}
-	
+
 	@Override
 	public boolean insert(DomainObject obj) {
 		MobilePhone mobile = (MobilePhone) obj;

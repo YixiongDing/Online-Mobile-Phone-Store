@@ -13,25 +13,29 @@ public class CustomerMapper extends DataMapper {
 
 	private static final String updateCustomerStatement =
 			"UPDATE users SET "
-					+ "name=?, email=?, address=?, password=? WHERE userid=? AND userType=CUSTOMER";
+					+ "username=?, email=?, address=?, password=? WHERE userid=? AND usertype = 'CUSTOMER'";
 
 	private static final String insertCustomerStatement = 
 			"INSERT INTO users "
-					+ "(userid, name, email, address,userType,password)"
-					+ " VALUES (?, ?, ?, ?, CUSTOMER,?);";
+					+ "(userid, username, email, address, usertype, password)"
+					+ " VALUES (?, ?, ?, ?, ?, ?);";
 
 	private static final String deleteCustomereStatement =  
 			"DELETE " +
 					" FROM users " +
-					" WHERE id  = ? AND userType=CUSTOMER";
+					" WHERE userid  = ? AND usertype = 'CUSTOMER'";
 	private final static String findCustomerByIdStatement =
-			"SELECT * from users WHERE userid = ? AND userType='CUSTOMER'";
+			"SELECT * from users WHERE userid = ? AND usertype ='CUSTOMER'";
 
 	private final static String findCustomerByEmailStatement =
-			"SELECT * from users WHERE email = ? AND userType='CUSTOMER'";
+			"SELECT * from users WHERE email = ? AND usertype ='CUSTOMER'";
 
 	private final static String findCustomerByName =
-			"SELECT * from users WHERE username = ? AND userType = 'CUSTOMER'";
+			"SELECT * from users WHERE username = ? AND usertype = 'CUSTOMER'";
+	
+	private static final String findAllUserStatement =
+			"SELECT * " + 
+					" FROM users ";
 
 	@Override
 	public boolean insert(DomainObject obj) {
@@ -46,8 +50,6 @@ public class CustomerMapper extends DataMapper {
 			findStatement.setString(4, customer.getAddress());
 			findStatement.setString(5, customer.getCustomerUserType());
 			findStatement.setString(6, customer.getCustomerPassword());
-
-
 			result = findStatement.executeUpdate();
 			DBConnection.closePreparedStatement(findStatement);
 			DBConnection.closeConnection(dbConnection);
@@ -58,7 +60,6 @@ public class CustomerMapper extends DataMapper {
 			return false;
 		else 
 			return true;
-
 	}
 
 	@Override
@@ -82,10 +83,7 @@ public class CustomerMapper extends DataMapper {
 			return false;
 		else 
 			return true;
-
-
 	}
-
 
 	@Override
 	public boolean update (DomainObject obj) {
@@ -95,12 +93,11 @@ public class CustomerMapper extends DataMapper {
 		try {
 			Connection dbConnection = DBConnection.getDBConnection();
 			PreparedStatement findStatement = DBConnection.prepare(updateCustomerStatement, dbConnection);
-			findStatement.setInt(1, customer.getUserId());
-			findStatement.setString(2, customer.getCustomerName());
-			findStatement.setString(3, customer.getEmail());
-			findStatement.setString(4, customer.getAddress());
-			findStatement.setString(5, customer.getCustomerPassword());
-
+			findStatement.setString(1, customer.getCustomerName());
+			findStatement.setString(2, customer.getEmail());
+			findStatement.setString(3, customer.getAddress());
+			findStatement.setString(4, customer.getCustomerPassword());
+			findStatement.setInt(5, customer.getUserId());
 			result = findStatement.executeUpdate();
 			DBConnection.closePreparedStatement(findStatement);
 			DBConnection.closeConnection(dbConnection);
@@ -111,8 +108,6 @@ public class CustomerMapper extends DataMapper {
 			return false;
 		else 
 			return true;
-
-
 	}
 
 	public List<Customer> findCustomerById(Customer customer){
@@ -120,7 +115,7 @@ public class CustomerMapper extends DataMapper {
 		try {
 			Connection dbConnection = DBConnection.getDBConnection();
 			PreparedStatement findStatement = DBConnection.prepare(findCustomerByIdStatement, dbConnection);
-			findStatement.setInt(1, customer.getUserId());
+			findStatement.setInt(1, customer.getCustomerId());
 			ResultSet resultSet = findStatement.executeQuery();
 
 			while(resultSet.next()) {
@@ -132,8 +127,7 @@ public class CustomerMapper extends DataMapper {
 				c.setAddress(resultSet.getString(4));
 				c.setCustomerUserType(resultSet.getString(5));
 				c.setCustomerPassword(resultSet.getString(6));
-
-				identityMap.put(c.getUserId(), c);
+				identityMap.put(c.getCustomerId(), c);
 				result.add(c);
 			}
 		} catch (Exception e) {
@@ -159,7 +153,6 @@ public class CustomerMapper extends DataMapper {
 				c.setAddress(resultSet.getString(4));
 				c.setCustomerUserType(resultSet.getString(5));
 				c.setCustomerPassword(resultSet.getString(6));
-
 				identityMap.put(c.getUserId(), c);
 				result.add(c);
 			}
@@ -168,20 +161,65 @@ public class CustomerMapper extends DataMapper {
 		}
 		return result;
 	}
+	
+	public List<User> findAllUser(){
+		List<User> result = new ArrayList<User>();
+		try {
+			Connection dbConnection = DBConnection.getDBConnection();
+			PreparedStatement findStatement = DBConnection.prepare(findAllUserStatement, dbConnection);
+			ResultSet rs = findStatement.executeQuery();
 
+			while(rs.next()) {
+				User u = new User();
+				IdentityMap<User> identityMap = IdentityMap.getInstance(u);
+				u.setUserId(rs.getInt(1));
+				u.setName(rs.getString(2));
+				u.setEmail(rs.getString(3));
+				u.setAddress(rs.getString(4));
+				u.setUserType(rs.getString(5));
+				u.setPassword(rs.getString(6));
+				identityMap.put(u.getUserId(),u);
+				result.add(u);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return result;
+	}
 
 	public static Customer getCustomerByName(String username) {
-
 		Customer customer = null;
-
 		try {
 			Connection dbConnection = DBConnection.getDBConnection();
 			PreparedStatement findStatement = DBConnection.prepare(findCustomerByName, dbConnection);
 			findStatement.setString(1, username);
 			ResultSet result = findStatement.executeQuery();
-
 			while(result.next()) {
+				customer= new Customer();
+				customer.setUserId(result.getInt(1));
+				customer.setName(result.getString(2));
+				customer.setEmail(result.getString(3));
+				customer.setAddress(result.getString(4));
+				customer.setUserType(result.getString(5));  // need to update database for the consistency
+				customer.setPassword(result.getString(6));
+			}
 
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return customer;
+	}
+	
+	public static Customer getCustomerById(int id) {
+
+		Customer customer = null;
+
+		try {
+			Connection dbConnection = DBConnection.getDBConnection();
+			PreparedStatement findStatement = DBConnection.prepare(findCustomerByIdStatement, dbConnection);
+			findStatement.setInt(1, id);
+			ResultSet result = findStatement.executeQuery();
+			while(result.next()) {
 				customer= new Customer();
 				customer.setUserId(result.getInt(1));
 				customer.setName(result.getString(2));
@@ -194,10 +232,6 @@ public class CustomerMapper extends DataMapper {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-
 		return customer;
 	}
-
-
 }

@@ -64,19 +64,31 @@
 
 	<div class="collapse navbar-collapse" id="navbarSupportedContent">
 		<ul class="navbar-nav mr-auto">
-			<li class="nav-item"><a class="nav-link" href="HomePageServlet">Home</a></li>
+			<li class="nav-item"><a class="nav-link" href="HomePageControllerServlet">Home</a></li>
 			<li class="nav-item"><a class="nav-link"
-				href="ViewMobilePhonesServlet">All Mobile Phones</a></li>
+				href="ViewMobilePhonesControllerServlet">All Mobile Phones</a></li>
 			<li class="nav-item active"><a class="nav-link" href="#"> <%
 						out.println(mobile.getModelName());
 					%><span class="sr-only">(current)</span>
 			</a></li>
 		</ul>
+		
+		<div class="nav-item  my-2 my-lg-0">
+			<%
+				if (AppSession.isAuthenticated()) {
+					
+			%>
+					<a class="nav-link" href="DashboardControllerServlet">Dashboard</a>
+			<%
+				} 
+			%>
+		</div>		
+
 		<div class="nav-item  my-2 my-lg-0">
 			<%
 				if (!AppSession.isAuthenticated()) {
 			%>
-			<a class="nav-link" href="LoginServlet">Hello! Please Login</a>
+			<a class="nav-link" href="LoginControllerServlet">Hello! Please Login</a>
 		</div>
 		<%
 			} else {
@@ -90,6 +102,7 @@
 				<button type="submit" class="btn btn-primary">Logout</button>
 			</form>
 		</div>
+
 		<%
 			}
 		%>
@@ -234,15 +247,24 @@
 					<!-- Grid column -->
 					<!-- Grid column -->
 					<div class="col-xl-10 col-md-11 col-10">
-						<form action="" method="post">
+						<%
+							if (AppSession.isAuthenticated() && AppSession.hasRole(AppSession.CUSTOMER_ROLE)) {
+						%>
+						<form action="CheckOutControllerServlet" method="post">
 							<div class="form-group">
 								<label for="atc"></label> <input type="hidden"
 									class="form-control" style="text-align: center;"
-									name="addToCart" value="addToCart">
+									name="buyNow" value=<%out.println(mobile.getMobilePhoneId());%>>
 							</div>
-							<button type="submit" class="btn btn-primary">Add To
-								Cart</button>
+							<button type="submit" class="btn btn-primary">Buy Now</button>
 						</form>
+						<%
+							} else {
+						%>
+						<h4 class="text-primary mt-5 "> Login to purchase this mobile phone </h4>
+						<%
+							}
+						%>
 					</div>
 					<!-- Grid column -->
 				</div>

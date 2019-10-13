@@ -30,7 +30,7 @@
 		List<MobilePhone> mobiles = (ArrayList<MobilePhone>) request.getAttribute("mobile");
 		MobilePhone mobile = mobiles.get(0);
 	%>
-	<a href="ManageMobilePhoneServlet" class="blue-text">
+	<a href="ManageMobilePhoneControllerServlet" class="blue-text">
 		<h6 class="font-weight-bold mb-3" style="font-size: 20px;">
 			<i class="fas fa-fire pr-2"><- Manage Mobile Phones </i>
 		</h6>
@@ -38,7 +38,7 @@
 	<section class="container text-center">
 		<h2 style="margin-bottom: 20px;">Update Mobile Phone Information</h2>
 
-		<form action="UpdateMobilePhoneInfoServlet" method="post"
+		<form action="UpdateMobilePhoneInfoControllerServlet" method="post"
 			style="margin-left: auto; margin-right: auto; width: 20%;">
 			<div class="form-group">
 				<label for="exampleFormControlInput1" style="font-size: 15px">Id</label>
