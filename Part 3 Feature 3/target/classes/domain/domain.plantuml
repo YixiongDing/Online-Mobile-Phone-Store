@@ -1,0 +1,326 @@
+@startuml
+
+title __DOMAIN's Class Diagram__\n
+
+  package  {
+    package domain {
+      class Administrator {
+          + Administrator()
+          + Administrator()
+          + getId()
+          + getAdministratorId()
+          + setAdministratorId()
+          + getAdministratorName()
+          + setAdministratorName()
+          + getAdministratorEmail()
+          + setAdministratorEmail()
+          + getAdministratorAddress()
+          + setAdministratorAddress()
+      }
+    }
+  }
+  
+
+  package  {
+    package domain {
+      class AdministratorAssembler {
+          + AdministratorAssembler()
+          + writeDTO()
+      }
+    }
+  }
+  
+
+  package  {
+    package domain {
+      class AdministratorDTO {
+          - userId : int
+          - name : String
+          - email : String
+          - address : String
+          + AdministratorDTO()
+          + getAdministratorId()
+          + setAdministratorId()
+          + getAdministratorName()
+          + setAdministratorName()
+          + getAdministratorEmail()
+          + setAdministratorEmail()
+          + getAdministratorAddress()
+          + setAdministratorAddress()
+          + toString()
+          {static} + readString()
+      }
+    }
+  }
+  
+
+  package  {
+    package domain {
+      class Customer {
+          + Customer()
+          + Customer()
+          + getId()
+          + getCustomerId()
+          + setCustomerId()
+          + getCustomerName()
+          + setCustomerName()
+          + getCustomerEmail()
+          + setCustomerEmail()
+          + getCustomerAddress()
+          + setCustomerAddress()
+      }
+    }
+  }
+  
+
+  package  {
+    package domain {
+      class CustomerAssembler {
+          + CustomerAssembler()
+          + writeDTO()
+      }
+    }
+  }
+  
+
+  package  {
+    package domain {
+      class CustomerDTO {
+          - userId : int
+          - name : String
+          - email : String
+          - address : String
+          + CustomerDTO()
+          + getCustomerId()
+          + setCustomerId()
+          + getCustomerName()
+          + setCustomerName()
+          + getCustomerEmail()
+          + setCustomerEmail()
+          + getCustomerAddress()
+          + setCustomerAddress()
+          + toString()
+          {static} + readString()
+      }
+    }
+  }
+  
+
+  package  {
+    package domain {
+      class DomainObject {
+          + DomainObject()
+          + getId()
+      }
+    }
+  }
+  
+
+  package  {
+    package domain {
+      class MobilePhone {
+          - mobilePhoneId : int
+          - brand : String
+          - price : float
+          - qty : int
+          - description : String
+          + MobilePhone()
+          + getId()
+          + MobilePhone()
+          + getMobilePhoneId()
+          + setMobilePhoneId()
+          + getBrand()
+          + setBrand()
+          + getModelName()
+          + setModelName()
+          + getStorageSize()
+          + setStorageSize()
+          + getColor()
+          + setColor()
+          + getPrice()
+          + setPrice()
+          + getQty()
+          + setQty()
+          + getDescription()
+          + setDescription()
+      }
+    }
+  }
+  
+
+  package  {
+    package domain {
+      class MobilePhoneAssembler {
+          + MobilePhoneAssembler()
+          + writeDTO()
+      }
+    }
+  }
+  
+
+  package  {
+    package domain {
+      class MobilePhoneDTO {
+          - mobilePhoneId : int
+          - brand : String
+          - modelName : String
+          - storageSize : String
+          - color : String
+          - price : float
+          - qty : int
+          - description : String
+          + MobilePhoneDTO()
+          + getMobilePhoneId()
+          + setMobilePhoneId()
+          + getBrand()
+          + setBrand()
+          + getModelName()
+          + setModelName()
+          + getStorageSize()
+          + setStorageSize()
+          + getColor()
+          + setColor()
+          + getPrice()
+          + setPrice()
+          + getQty()
+          + setQty()
+          + getDescription()
+          + setDescription()
+          + toString()
+          {static} + readString()
+      }
+    }
+  }
+  
+
+  package  {
+    package domain {
+      class Model {
+          - modelName : String
+          - storageSize : String
+          - color : String
+          + Model()
+          + Model()
+          + getModelName()
+          + setModelName()
+          + getStorageSize()
+          + setStorageSize()
+          + getColor()
+          + setColor()
+      }
+    }
+  }
+  
+
+  package  {
+    package domain {
+      class Order {
+          - orderId : int
+          - createTime : Date
+          - status : String
+          + Order()
+          + Order()
+          + getId()
+          + getOrderId()
+          + setOrderId()
+          + getCreateTime()
+          + setCreateTime()
+          + getStatus()
+          + setStatus()
+          + getMobilePhone()
+          + setMobilePhone()
+          + getCustomer()
+          + setCustomer()
+          - load()
+      }
+    }
+  }
+  
+
+  package  {
+    package domain {
+      class OrderAssembler {
+          + OrderAssembler()
+          + writeDTO()
+          - writeCustomerDTO()
+          + writeMobilePhoneDTO()
+      }
+    }
+  }
+  
+
+  package  {
+    package domain {
+      class OrderDTO {
+          - orderId : int
+          - createTime : Date
+          - status : String
+          + OrderDTO()
+          + getOrderId()
+          + setOrderId()
+          + getCreateTime()
+          + setCreateTime()
+          + getStatus()
+          + setStatus()
+          + getMobilePhone()
+          + setMobilePhone()
+          + getCustomer()
+          + setCustomer()
+          + toString()
+          {static} + readString()
+      }
+    }
+  }
+  
+
+  package  {
+    package domain {
+      class User {
+          - name : String
+          - userType : String
+          - userId : int
+          - email : String
+          - address : String
+          - password : String
+          + User()
+          + User()
+          + getUserId()
+          + setUserId()
+          + getName()
+          + setName()
+          + getUserType()
+          + setUserType()
+          + getEmail()
+          + setEmail()
+          + getAddress()
+          + setAddress()
+          + setPassword()
+          + getPassword()
+          {static} + getUser()
+      }
+    }
+  }
+  
+
+  Administrator -up-|> User
+  AdministratorDTO -up-|> Serializable
+  Customer -up-|> User
+  CustomerDTO -up-|> Serializable
+  MobilePhone -up-|> DomainObject
+  MobilePhone o-- Model : model
+  Order -up-|> DomainObject
+  Order o-- MobilePhone : mobilePhone
+  Order o-- Customer : customer
+  OrderDTO o-- MobilePhoneDTO : mobilePhone
+  OrderDTO o-- CustomerDTO : customer
+  User -up-|> DomainObject
+
+
+right footer
+
+
+PlantUML diagram generated by SketchIt! (https://bitbucket.org/pmesmeur/sketch.it)
+For more information about this tool, please contact philippe.mesmeur@gmail.com
+endfooter
+
+@enduml
